@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>新冠疫情大数据平台</title>
+		<link href="../static/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="../static/css/base.css">
+		<link rel="stylesheet" href="../static/css/index.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+
+		<style>
+			.t_title {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				font-size: 2.5em;
+				line-height: 80px;
+				color: #fff;
+			}
+			
+			#chart_map {
+				cursor: pointer;
+			}
+			
+			.t_show {
+				position: absolute;
+				top: 0;
+				right: 0;
+				border-radius: 2px;
+				background: #2C58A6;
+				padding: 2px 5px;
+				color: #fff;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<!--header-->
+		<div class="header">
+			<div class="bg_header" style="float: left;padding-top: 6px;">
+				<div class="info fl" style="width: 30%;">
+					<div style="float: left;">
+						<p style="padding-top: 5px;">新增死亡数</p>
+						<p class="nums" style="color: #e60000;" id="deadAdd">4495</p>
+					</div>
+
+					<div style="float: left;">
+						<p style="padding-top: 5px;">总死亡数</p>
+						<p class="nums" style="color: #e60000;" id="dead">4311448</p>
+					</div>
+
+					<div style="float: right;">
+						<p style="padding-top: 5px;">总确诊数</p>
+						<p class="nums" style="color: #e60000;" id="totalConfirm">203975687</p>
+					</div>
+
+				</div>
+				<div class="info2 fl" style="width: 36%;">
+					<div id="clock" style="margin-top: -7px;height: 0px;transform-origin: center;transform: scale(.5);padding-left: 120px;position: static;">
+						<p class="date">[[ date ]]</p>
+						<p class="time">[[ time ]]</p>
+					</div>
+				</div>
+
+				<div class="info fr" style="width: 30%;">
+					<div style="float: left;">
+						<p style="padding-top: 5px;">总疫苗接种数</p>
+						<p class="nums" style="color: #4ce600;" id="totalVaccinations">4461134659</p>
+					</div>
+
+					<div style="float: left;">
+						<p style="padding-top: 5px;">总治愈数</p>
+						<p class="nums" style="color: #4ce600;" id="heal">164548448</p>
+					</div>
+
+					<div style="float: right;">
+						<p style="padding-top: 5px;">新增治愈数</p>
+						<p class="nums" style="color: #4ce600;" id="healAdd">112902</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--main-->
+		<div class="data_content">
+
+			<div class="data_main">
+
+				<div class="main_left fl">
+					<div class="left_1 t_btn6" style="cursor: pointer;">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_1.png" alt=""> 中国疫情城市排名
+						</div>
+						<div id="chart_1" class="chart" style="width:100%;height: 280px;margin-top: 20px;"></div>
+					</div>
+					<div class="left_2" style="cursor: pointer;">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_3.png" alt=""> 中国疫情地图aa
+						</div>
+						<div id="chart_2" class="chart t_btn9" style="width:100%;height: 280px;"></div>
+					</div>
+				</div>
+				<div class="main_center fl">
+					<div class="center_text">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_2.png" alt=""> 世界疫情地图
+						</div>
+						<div id="chart_map" style="width:100%;height:610px;"></div>
+					</div>
+				</div>
+				<div class="main_right fr">
+					<div class="right_1">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_4.png" alt=""> 各洲疫情占比
+						</div>
+						<div id="chart_3" class="echart t_btn7" style="width:100%;height: 280px;padding-top: 30px;"></div>
+					</div>
+					<div class="right_2">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_5.png" alt=""> 新增确诊国家排名
+						</div>
+						<div id="chart_4" class="echart fl t_btn4" style="width:100%;height: 280px;cursor: pointer;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="data_bottom">
+				<div class="bottom_1 fl t_btn5" style="cursor: pointer;">
+					<!--左上边框-->
+					<div class="t_line_box">
+						<i class="t_l_line"></i>
+						<i class="l_t_line"></i>
+					</div>
+					<!--右上边框-->
+					<div class="t_line_box">
+						<i class="t_r_line"></i>
+						<i class="r_t_line"></i>
+					</div>
+					<!--左下边框-->
+					<div class="t_line_box">
+						<i class="l_b_line"></i>
+						<i class="b_l_line"></i>
+					</div>
+					<!--右下边框-->
+					<div class="t_line_box">
+						<i class="r_b_line"></i>
+						<i class="b_r_line"></i>
+					</div>
+					<div class="main_title">
+						<img src="../static/img/t_6.png" alt=""> 全球新增确诊数
+					</div>
+					<div id="chart_5" class="echart fl" style="width:100%;height: 250px;margin-top: 15px;margin-left:15px;"></div>
+				</div>
+				<div class="bottom_center fl">
+					<div class="bottom_2 fl">
+						<!--左上边框-->
+						<div class="t_line_box">
+							<i class="t_l_line"></i>
+							<i class="l_t_line"></i>
+						</div>
+						<!--右上边框-->
+						<div class="t_line_box">
+							<i class="t_r_line"></i>
+							<i class="r_t_line"></i>
+						</div>
+						<!--左下边框-->
+						<div class="t_line_box">
+							<i class="l_b_line"></i>
+							<i class="b_l_line"></i>
+						</div>
+						<!--右下边框-->
+						<div class="t_line_box">
+							<i class="r_b_line"></i>
+							<i class="b_r_line"></i>
+						</div>
+						<div class="main_title">
+							<img src="../static/img/t_7.png" alt=""> 全球和中国疫苗接种数
+						</div>
+						<div id="chart_6" class="echart t_btn8" style="width:100%;height: 250px;margin-top: 40px;padding-top: 0px;"></div>
+					</div>
+				</div>
+
+				<div class="bottom_4 fr">
+					<!--左上边框-->
+					<div class="t_line_box">
+						<i class="t_l_line"></i>
+						<i class="l_t_line"></i>
+					</div>
+					<!--右上边框-->
+					<div class="t_line_box">
+						<i class="t_r_line"></i>
+						<i class="r_t_line"></i>
+					</div>
+					<!--左下边框-->
+					<div class="t_line_box">
+						<i class="l_b_line"></i>
+						<i class="b_l_line"></i>
+					</div>
+					<!--右下边框-->
+					<div class="t_line_box">
+						<i class="r_b_line"></i>
+						<i class="b_r_line"></i>
+					</div>
+					<div class="main_title">
+						<img src="../static/img/t_7.png" alt=""> 全球新增死亡数
+					</div>
+					<div id="chart_7" class="echart t_btn3" style="width:100%;height: 250px;margin-top: 15px;margin-left: 15px;"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+	</body>
+	<script src="../static/js/jquery-2.2.1.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/common.js"></script>
+	<script src="../static/js/echarts.min.js"></script>
+	<script src="../static/js/echarts-wordcloud.js"></script>
+<!--	<script src="../static/js/echarts-wordcloud.js.map"></script>-->
+	<script src="../static/js/dataTool.js"></script>
+	<script src="../static/js/index.js"></script>
+	<script src="../static/js/china.js"></script>
+	<script src="../static/js/world.js"></script>
+	<script src="../static/js/vue.min.js"></script>
+	<script src="../static/js/vue-index.js"></script>
+
+</html>

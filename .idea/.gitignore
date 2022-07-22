@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+../data/comments.csv
+../data/movies.csv
+../data/ratings.csv
+../data/person.csv
+../data/users.csv
