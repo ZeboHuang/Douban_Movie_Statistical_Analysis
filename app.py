@@ -29,7 +29,9 @@ def index():
 @app.route('/get_word_cloud')
 def get_word_cloud():
     """获取评论词云数据"""
-    return jsonify(db.comments_word_cloud())
+    print("获取数据")
+    pass
+    # return jsonify(db.comments_word_cloud())
 
 '''
 @app.route('/get_world_map_data')
