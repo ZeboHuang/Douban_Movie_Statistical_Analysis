@@ -13,7 +13,7 @@ import jieba
 
 import utils
 
-df = pd.read_csv('./data/肖申克的救赎_comments.csv')
+df = pd.read_csv('./data/comments.csv')
 stopwords = utils.stopwords_list('./data/stopwords.txt')
 
 
