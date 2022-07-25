@@ -3,14 +3,18 @@ function world_static_list() {
 
     //发送ajax请求
 	$.ajax({
-		url: "/get_world_static_list_data",  //请求的资源路径
+		url: "/get_test_data",  //请求的资源路径
 		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-			$("#deadAdd").text(data[0]);  //新增死亡
-			$("#dead").text(data[1]);  // 总死亡
-			$("#totalConfirm").text(data[2]);  //总确诊
-			$("#heal").text(data[3]);  //总治愈
-			$("#healAdd").text(data[4]);  // 新增治愈
-			$("#totalVaccinations").text(data[5]);  //总疫苗接种数
+//			$("#deadAdd").text(data[0]);  //新增死亡
+//			$("#dead").text(data[1]);  // 总死亡
+//			$("#totalConfirm").text(data[2]);  //总确诊
+//			$("#heal").text(data[3]);  //总治愈
+//			$("#healAdd").text(data[4]);  // 新增治愈
+//			$("#totalVaccinations").text(data[5]);  //总疫苗接种数
+
+            console.log('test')
+            console.log(data)
+
 		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
 			alert('world_static_list ajax error')
 		},
@@ -939,9 +943,65 @@ function echarts_continent_pie() {
 	});
 }
 
+function echarts_echarts_test(){
+
+
+
+
+$.ajax({
+		url: "/get_test_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+console.log('get_data: ')
+console.log(data)
+
+var category=data.category
+var value=data.value
+console.log(category)
+
+var chartDom = document.getElementById('chart_2');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+
+
+  xAxis: {
+    type: 'category',
+    data: category
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: value,
+      type: 'bar',
+      showBackground: true,
+      backgroundStyle: {
+        color: 'rgba(180, 180, 180, 0.2)'
+      }
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+
+
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+}
+
 
 function flashAll() {
-    echarts_word_cloud()
+//    echarts_word_cloud()
+    echarts_echarts_test()
     // 调用上述所有函数
 	// world_static_list();
 	// echarts_china_rank();
