@@ -3,7 +3,7 @@
   File Name：       test
   Description :
   Author :          Nick
-  date：            2022/1/25
+  date：            2022/1/25c
   Change Activity:  2022/1/25:
 """
 
@@ -65,6 +65,10 @@ class HousePriceHanYang(object):
         with open(r"./data/HousePriceHanYang.csv", 'a', encoding="utf-8") as fd:
             writer = csv.writer(fd)
             writer.writerows(list_)
+
+
+# class FengLiuXingTest(object):
+
 
 
 def main():

@@ -56,6 +56,7 @@ def load_comments_word_cloud():
     pass
 
 
+
 if __name__ == '__main__':
     print(comments_word_cloud())
     load_comments_word_cloud()
