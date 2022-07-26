@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\learning_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\movies.csv">
           <value>
             <Attribute>
@@ -31,14 +38,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\users.csv">
+        <entry key="\data\recent_years_genres.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\肖申克的救赎_comments.csv">
+        <entry key="\data\users.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

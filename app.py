@@ -5,6 +5,7 @@ from flask import render_template
 from flask.json import JSONEncoder as _JSONEncoder
 import db
 
+
 # 重写Flask框架中的JSONEncoder类中的default方法
 class JSONEncoder(_JSONEncoder):
     def default(self, o):
@@ -26,10 +27,32 @@ def index():
     return render_template("databoard.html")
 
 
+@app.route('/get_predict_score')
+def get_predict_score():
+    """
+    获取预测数据与真实值数据，传给前端进行对比
+    :return: json 格式数据
+    """
+    result = db.get_prediction()
+    # print(result)
+    return jsonify(result)
+
+
+@app.route('/get_china_actors')
+def get_china_actors():
+    """
+    为地图提供演员数据
+    :return:
+    """
+    dict_ = db.get_china_actors()
+    print(dict_)
+    return dict_
+
+
 @app.route('/get_word_cloud')
 def get_word_cloud():
-    """获取评论词云数据"""
-    return jsonify(db.comments_word_cloud())
+    return db.get_word_cloud()
+
 
 '''
 @app.route('/get_world_map_data')
