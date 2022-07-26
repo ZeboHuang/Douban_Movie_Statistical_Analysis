@@ -41,7 +41,7 @@ def comments_groupby_movie():
     result.to_csv("./data/comments_groupfy.csv", encoding='utf-8')
     print("分类完成")
 
-
+#此方法没有用到
 def word_cloud_template_list():
     lst = ['肖申克的救赎', '阿甘正传', '这个杀手不太冷', '楚门的世界', '教父']
     data = pd.read_csv('./data/movies.csv', usecols=['MOVIE_ID', 'NAME'], index_col=0)
@@ -56,7 +56,7 @@ def word_cloud_template_list():
     with open("./data/movieid_name_dict.json", 'w', encoding='utf-8') as fp:
         json.dump(dict_, fp, ensure_ascii=False)
 
-
+#中国演员json表，未使用
 def actor_china_json():
     data = pd.read_csv('./data/person.csv',
                        usecols=['PERSON_ID', "NAME", 'SEX', 'BIRTH', 'BIRTHPLACE', 'PROFESSION', 'CONSTELLATORY'],
@@ -84,6 +84,7 @@ def actor_china_json():
 
 
 def province_actors():
+    """按省份分类-演员数量数据集"""
     data = pd.read_csv('./data/person.csv', usecols=['PERSON_ID', "NAME", 'SEX', 'BIRTH', 'BIRTHPLACE', 'PROFESSION'])
 
     # 获取国内演员
@@ -94,12 +95,13 @@ def province_actors():
     data3.columns = ['PERSON_ID', 'NAME', 'SEX', 'BIRTH', 'PROFESSION', 'REGION_1', 'REGION_2']
     data4 = data3.groupby('REGION_2')
     data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json', force_ascii=False)
-    
+
 
 
 
 
 def language_movies():
+    """按语言分类数据集提取"""
     data = pd.read_csv("./data/movies.csv", usecols=['MOVIE_ID', 'LANGUAGES'])
     clean_data = data.dropna(subset=['LANGUAGES'])
     d1 = clean_data.LANGUAGES.str.split('/', expand=True)
@@ -119,5 +121,3 @@ if __name__ == '__main__':
     province_actors()
     # language_movies()
 
-
-    pass

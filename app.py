@@ -5,7 +5,6 @@ from flask import render_template
 from flask.json import JSONEncoder as _JSONEncoder
 import db
 
-
 # 重写Flask框架中的JSONEncoder类中的default方法
 class JSONEncoder(_JSONEncoder):
     def default(self, o):
@@ -26,7 +25,7 @@ app = Flask(__name__)
 def index():
     return render_template("databoard.html")
 
-
+#hzb modify start
 @app.route('/get_predict_score')
 def get_predict_score():
     """
@@ -48,11 +47,19 @@ def get_china_actors():
     print(dict_)
     return dict_
 
-
 @app.route('/get_word_cloud')
 def get_word_cloud():
     return db.get_word_cloud()
 
+#hzb modify end
+
+#lhg modify start
+@app.route('/get_test_data')
+def get_test_data():
+    dict_ = {'category': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+             'value': [120, 200, 150, 80, 70, 110, 130]}
+    return dict_
+#lhg modify end
 
 '''
 @app.route('/get_world_map_data')

@@ -10,6 +10,8 @@ import json
 
 import server as sv
 
+#hzb modify start
+
 predict_score = sv.get_score_prediction()
 wordcloud_ = sv.get_word_cloud()
 
@@ -21,12 +23,10 @@ def load_comments_word_cloud():
         json_data = json.load(fp)
     print(json_data)
 
-
 def load_recent_year_movie_count():
     # """近年来每年不同类型电影的统计"""
     # if recent_year_df is None:
     #     recent_year_df = pd.read_csv('./data/recent_years_genres.csv')
-    pass
 
 
 def get_word_cloud():
@@ -52,30 +52,10 @@ def get_china_actors():
     return dict_
     # return sv.get_china_actors()
 
+#hzb modify end
+
 
 if __name__ == '__main__':
     # print(comments_word_cloud())
     # load_comments_word_cloud()
-    # sp = ScorePrediction()
-    # sp.refit()
-
-    # result = sp.predict(sp.x_test)
-    # print(result)
-    # print(sp.mean_squared_error())
-    # print(sp.score())
-    # print(sp.y_test)
-
-    # result = get_prediction()
-    # print(result)
-
-    # wc = WordCloud()
-    # wc.generate_wordcloud()
-    # print(get_word_cloud())
-
-    # wordcloud_.generate_wordcloud()
-    # movie_id = random.sample(WordCloud.movie_list, 1)[0]
-    #
-    # print(movie_id)
-    get_china_actors()
-
     pass
