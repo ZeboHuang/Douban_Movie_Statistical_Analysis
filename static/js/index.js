@@ -2,24 +2,17 @@
 function world_static_list() {
 
     //发送ajax请求
-	$.ajax({
-		url: "/get_test_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-//			$("#deadAdd").text(data[0]);  //新增死亡
-//			$("#dead").text(data[1]);  // 总死亡
-//			$("#totalConfirm").text(data[2]);  //总确诊
-//			$("#heal").text(data[3]);  //总治愈
-//			$("#healAdd").text(data[4]);  // 新增治愈
-//			$("#totalVaccinations").text(data[5]);  //总疫苗接种数
+    $.ajax({
+        url: "/get_world_static_list_data", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
-            console.log('test')
-            console.log(data)
 
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
+        },
+        async: true
+    })
 }
 //echart_1词云图
 function echarts_word_cloud(){
@@ -301,110 +294,137 @@ option && myChart.setOption(option);
 
 //echart_2中国疫情地图
 function echarts_china_map() {
-	// 基于准备好的dom，初始化echarts实例
-	var myChart = echarts.init(document.getElementById('chart_2'));
-	var china_data;
-		$.ajax({
-			url: "/get_china_map_data",
-			success: function(data) {
-				china_data = data;
-				var ec_center_option = {
-					title: {
-						text: '',
-						subtext: '',
-						x: 'left'
-					},
-					tooltip: {
-						trigger: 'item'
-					},
-					//左侧小导航图标
-					visualMap: {
-						show: true,
-						x: 'left',
-						y: 'bottom',
-						textStyle: {
-							fontSize: 8,
-							color: "rgba(255, 255, 255, 1.0)",
-						},
-						legend: {
-							bottom: "0%",
-							itemGap: 0,
-							itemHeight: 0
-						},
-						splitList: [{
-								start: 1,
-								end: 9,
-							},
-							{
-								start: 10,
-								end: 99
-							},
-							{
-								start: 100,
-								end: 999
-							},
-							{
-								start: 1000,
-								end: 9999
-							},
-							{
-								start: 10000
-							}
-						],
-						color: ['#8A3310', '#C64918', '#E55B25', '#F2AD92', '#F9DCD1']
-					},
+    console.log('echarts_china_map')
+    //发送ajax请求
+    $.ajax({
+        url: "/get_china_actors", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+            console.log(data)
 
-					//配置属性
-					series: [{
-						name: '累积确诊人数',
-						type: 'map',
-						mapType: 'china',
-						roam: true,
-						itemStyle: {
-							normal: {
-								label: {
-									show: true,
-									color: '#fff'
-								},
-								borderWidth: .5,
-								borderColor: '#009fe8',
-								areaColor: '#ffefd5'
-							},
-							emphasis: {
-								borderWidth: .5,
-								borderColor: '#4b0082',
-								areaColor: '#fff'
-							}
-						},
-						label: {
-							normal: {
-								show: true, //省份名称
-								fontSize: 8
-							},
-							emphasis: {
-								show: true,
-								fontSize: 8
-							}
-						},
-						data: china_data
-						// data: [{
-						// 		name: "上海",
-						// 		value: 1000
-						// 	},] //数据
-					}]
-				};
+            rows = new Array()
+            lst = "河北、河南、湖南、湖北、浙江、江西、陕西、山东、山西、黑龙江、青海、辽宁、云南、海南、贵州、吉林、台湾、福建、甘肃、安徽、北京、江苏、上海、重庆、四川、广东、广西、宁夏、西藏、新疆、内蒙古、香港、澳门、天津、台湾".split('、')
+            console.log(lst[1])
+            for (let i in lst) {
+                row = new Object()
+                row.name = lst[i]
+                row.value = data[lst[i]] == 0 ? 0 : data[lst[i]]
+                rows.push(row)
+            }
+            console.log(rows)
 
-				//使用制定的配置项和数据显示图表
-				myChart.setOption(ec_center_option);
-				window.addEventListener("resize", function() {
-					myChart.resize();
-				});
-			},
-			error: function(xhr, type, errorThrown) {
-				alert('echarts_china_map ajax error')
-			},
-			async: true
-		});
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('chart_map'));
+
+            var ec_center_option = {
+                title: {
+                    text: '',
+                    subtext: '',
+                    x: 'left'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                //左侧小导航图标
+                visualMap: {
+                    show: true,
+                    x: 'left',
+                    y: 'bottom',
+                    textStyle: {
+                        fontSize: 8,
+                        color: "rgba(255, 255, 255, 1.0)",
+                    },
+                    legend: {
+                        bottom: "0%",
+                        itemGap: 0,
+                        itemHeight: 0
+                    },
+                    splitList: [{
+                        start: 1,
+                        end: 9,
+                    },
+                        {
+                            start: 10,
+                            end: 99
+                        },
+                        {
+                            start: 100,
+                            end: 999
+                        },
+                        {
+                            start: 1000,
+                            end: 9999
+                        },
+                        {
+                            start: 10000
+                        }
+                    ],
+                    color: ['#8A3310', '#C64918', '#E55B25', '#F2AD92', '#F9DCD1']
+                },
+
+                //配置属性
+                series: [{
+                    name: '总演员数',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: true,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                color: '#fff'
+                            },
+                            borderWidth: .5,
+                            borderColor: '#009fe8',
+                            areaColor: '#ffefd5'
+                        },
+                        emphasis: {
+                            borderWidth: .5,
+                            borderColor: '#4b0082',
+                            areaColor: '#fff'
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true, //省份名称
+                            fontSize: 8
+                        },
+                        emphasis: {
+                            show: true,
+                            fontSize: 8
+                        }
+                    },
+                    data: rows
+
+                    // data: [{
+                    //         name: "上海",
+                    //         value: 1000
+                    //     },
+                    //     {
+                    //         name: "湖北",
+                    //         value: 100000
+                    //     },
+                    //     {
+                    //         name: "福建",
+                    //         value: 888
+                    //     }
+
+                    // ] //数据
+                }]
+            };
+
+            //使用制定的配置项和数据显示图表
+            myChart.setOption(ec_center_option);
+            window.addEventListener("resize", function () {
+                myChart.resize();
+            });
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('get_china_actors ajax error')
+        },
+        async: true
+    })
+
 }
 
 //echart_map世界疫情地图
@@ -887,6 +907,7 @@ function echarts_world_daily_dead() {
 
 
 }
+
 //各大洲数据饼图分析
 function echarts_continent_pie() {
 	var mychart = echarts.init(document.getElementById("chart_3"));
@@ -952,7 +973,6 @@ $.ajax({
 var myChart = echarts.init(chartDom);
 var option;
 var data = data.bbb;
-
 option = {
 title: {
 //        text: '流行的电影类型',
@@ -1425,6 +1445,100 @@ option && myChart.setOption(option);
 }
 
 
+
+function echarts_predict_score_line() {
+    //发送ajax请求
+    $.ajax({
+        url: "/get_predict_score", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+            console.log(data)
+            var chartDom = document.getElementById('chart_6');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                xAxis: {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: data.pred,
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    lineStyle: {
+                        color: '#ea7ccc',
+                        width: 3,
+                        type: 'dashed'
+                    },
+                    itemStyle: {
+                        borderWidth: 3,
+                        borderColor: '#bf444c',
+                        color: 'yellow'
+                    }
+                },
+                    {
+                        data: data.real,
+                        type: 'line',
+                        symbol: 'roundRect',
+                        symbolSize: 10,
+                        lineStyle: {
+                            color: '#73c0de',
+                            width: 3,
+                            type: 'dashed'
+                        },
+                        itemStyle: {
+                            borderWidth: 3,
+                            borderColor: '#d88273',
+                            color: 'yellow'
+                        }
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('get_predict_score ajax error')
+        },
+        async: true
+    })
+
+}
+
+function wordcloud_img() {
+    //发送ajax请求
+
+    $.ajax({
+        url: "/get_word_cloud", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+            var chartDom = document.getElementById('chart_1');
+            console.log(data)
+            var img = document.createElement('img')
+            img.src = data.path
+            img.setAttribute("height", "100%")
+            console.log(img.src)
+
+            chartDom.append(img)
+
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('get_word_cloud ajax error')
+        },
+        async: true
+    })
+}
+
+
+
+
 function flashAll() {
 //    echarts_word_cloud()
     echarts_echarts_test()
@@ -1436,6 +1550,14 @@ function flashAll() {
     echarts_echarts_test6()
 
 
+//    echarts_predict_score_line()
+//    wordcloud_img()
+//    // china_map()
+//    echarts_china_map()
+
+
+    // echarts_world_rank()
+    // echarts_word_cloud()
     // 调用上述所有函数
 	// world_static_list();
 	// echarts_china_rank();

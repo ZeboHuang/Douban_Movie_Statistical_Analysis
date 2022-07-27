@@ -1,9 +1,7 @@
 // 测试函数
 function echarts_test(){
 
-    var chartDom = document.getElementById('chart_1');
-    var myChart = echarts.init(chartDom);
-    var option;
+    
 
     option = {
         title: {

@@ -8,6 +8,7 @@
 """
 import json
 
+import server as sv
 import pandas as pd
 import jieba
 
@@ -17,47 +18,53 @@ import utils
 from app import JSONEncoder
 
 
-def comments_word_cloud():
-    """
-    影评数据词云图
-    :return:列表   [{关键词:出现的数量}]
-    """
-    df = pd.read_csv('./data/comments.csv')
-    stopwords = utils.stopwords_list('./data/stopwords.txt')
-    # 搜集所有评论
-    comments = list(df["CONTENT"])
-    # print(len(comments))
-    words = []
-    # 分词
-    for c in comments:
-        words_ = jieba.cut(c)
-        while True:
-            try:
-                w = words_.__next__().strip()
-                print(w)
-                if w not in stopwords:
-                    words.append(w)
-            except:
-                break
-    # end for
+#hzb modify start
 
-    word_frequence = pd.Series(words).value_counts().to_dict()
-    with open("./data/wordcloud.json", "w", encoding="utf-8") as fp:
-        json.dump(word_frequence, fp, ensure_ascii=False)
+predict_score = sv.get_score_prediction()
+wordcloud_ = sv.get_word_cloud()
 
-    return list(pd.Series(words).value_counts())
-
-
+#没用
 def load_comments_word_cloud():
     """封装 关键词与出现次数"""
     json_data = None
     with open("./data/wordcloud.json", "r", encoding="utf-8") as fp:
         json_data = json.load(fp)
     print(json_data)
-
     pass
 
+#没用
+def load_recent_year_movie_count():
+    # """近年来每年不同类型电影的统计"""
+    # if recent_year_df is None:
+    #     recent_year_df = pd.read_csv('./data/recent_years_genres.csv')
+    pass
 
+def get_word_cloud():
+    dict_ = {'path': wordcloud_.wordcloud_path}
+    return dict_
+
+
+def get_prediction():
+    """
+    获取预测信息
+    :return:
+    """
+    pred = predict_score.predict(predict_score.x_test)
+    pred = pred.reshape(1, -1)[0]
+    dict_ = {'real': predict_score.y_test.tolist(), 'pred': pred.tolist()}
+    return dict_
+
+
+def get_china_actors():
+    with open("./data/province_actors_cnt.json", encoding='utf-8') as fp:
+        dict_ = json.load(fp)
+    print(dict_)
+    return dict_
+    # return sv.get_china_actors()
+
+#hzb modify end
+
+#lhg modify start
 # 获取某年到某年的电影数据
 def get_movies_by_year_from_to(from_, to_):
     # data = pd.read_csv("./data/movies.csv", usecols=['MOVIE_ID', 'NAME', 'GENRES', 'YEAR'])
@@ -280,8 +287,10 @@ def get_language_movie():
     dict_new = {"aaa": dict_}
     print(dict_new)
     return dict_new
-
+#lhg modify end
 
 if __name__ == '__main__':
-    print(get_year_num_all())
+    # print(comments_word_cloud())
+    # load_comments_word_cloud()
+    # print(get_year_num_all())
     pass

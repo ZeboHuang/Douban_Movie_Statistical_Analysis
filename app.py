@@ -31,20 +31,35 @@ app = Flask(__name__)
 def index():
     return render_template("databoard.html")
 
+#hzb modify start
+@app.route('/get_predict_score')
+def get_predict_score():
+    """
+    获取预测数据与真实值数据，传给前端进行对比
+    :return: json 格式数据
+    """
+    result = db.get_prediction()
+    # print(result)
+    return jsonify(result)
+
+
+@app.route('/get_china_actors')
+def get_china_actors():
+    """
+    为地图提供演员数据
+    :return:
+    """
+    dict_ = db.get_china_actors()
+    print(dict_)
+    return dict_
 
 @app.route('/get_word_cloud')
 def get_word_cloud():
-    """获取评论词云数据"""
-    # print("获取数据")
-    # pass
-    return jsonify(db.comments_word_cloud())
+    return db.get_word_cloud()
 
+#hzb modify end
 
-@app.route('/get_test1_data')
-def get_test1_data():
-    return jsonify(db.get_directors_sort())
-
-
+#lhg modify start
 @app.route('/get_test_data')
 def get_test_data():
     # dict_ = {'category': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
