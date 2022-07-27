@@ -910,59 +910,540 @@ function echarts_world_daily_dead() {
 
 //各大洲数据饼图分析
 function echarts_continent_pie() {
-    var mychart = echarts.init(document.getElementById("chart_3"));
-    var mydata;
-    $.ajax({
-        url: "/get_continent_pie_data",
-        success: function (data) {
-            mydata = data;
-            option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b}: {c} ({d}%)'
-                },
-                legend: {
-                    left: 'center',
-                    data: ['亚洲', '南美洲', '北美洲', '非洲', '欧洲', '大洋洲', '其他'],
-                    textStyle: {
-                        color: "rgba(255, 255, 255, 1.0)"
-                    }
-                },
-                series: [{
-                    name: '各大洲分析',
-                    type: 'pie',
-                    radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        borderRadius: 20,
-                        borderColor: '#fff',
-                        borderWidth: 1
-                    },
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '20',
-                            fontWeight: 'bold'
-                        }
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    data: mydata
-                }]
-            };
-            mychart.setOption(option);
-        },
-        error: function (xhr, type, errorThrown) {
-            alert('echarts_continent_pie ajax error')
-        },
-        async: true
-    });
+	var mychart = echarts.init(document.getElementById("chart_3"));
+	var mydata;
+	$.ajax({
+		url: "/get_continent_pie_data",
+		success: function(data) {
+			mydata = data;
+			option = {
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b}: {c} ({d}%)'
+				},
+				legend: {
+					left: 'center',
+					data: ['亚洲', '南美洲', '北美洲', '非洲', '欧洲', '大洋洲', '其他'],
+					textStyle: {
+						color: "rgba(255, 255, 255, 1.0)"
+					}
+				},
+				series: [{
+					name: '各大洲分析',
+					type: 'pie',
+					radius: ['40%', '70%'],
+					avoidLabelOverlap: false,
+					itemStyle: {
+						borderRadius: 20,
+						borderColor: '#fff',
+						borderWidth: 1
+					},
+					label: {
+						show: false,
+						position: 'center'
+					},
+					emphasis: {
+						label: {
+							show: true,
+							fontSize: '20',
+							fontWeight: 'bold'
+						}
+					},
+					labelLine: {
+						show: false
+					},
+					data: mydata
+				}]
+			};
+			mychart.setOption(option);
+		},
+		error: function(xhr, type, errorThrown) {
+			alert('echarts_continent_pie ajax error')
+		},
+		async: true
+	});
 }
+
+function echarts_echarts_test(){
+
+$.ajax({
+		url: "/get_test_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+        var chartDom = document.getElementById('chart_2');
+var myChart = echarts.init(chartDom);
+var option;
+var data = data.bbb;
+option = {
+title: {
+//        text: '流行的电影类型',
+        subtext: '数量'
+    },
+  legend: {
+    // data: ['苹果', '梨'], //图例的数据数组
+    // selectedMode: 'single' //展示单项
+  },
+  xAxis: {
+    type: 'category',
+    data: [
+      '2010年',
+      '2011年',
+      '2012年',
+      '2013年',
+      '2014年',
+      '2015年',
+      '2016年',
+      '2017年',
+      '2018年',
+      '2019年'
+    ]
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series:
+    data
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+}
+
+
+function echarts_echarts_test1(){
+
+$.ajax({
+		url: "/get_test1_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_1');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+title: {
+        text: '导演均分排名',
+        subtext: '均分'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: key,
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'score:',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test2(){
+$.ajax({
+		url: "/get_test2_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_3');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+    title: {
+        text: '演员均分排名',
+        subtext: '均分'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: key,
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'score:',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test3(){
+
+$.ajax({
+		url: "/get_test3_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+var chartDom = document.getElementById('chart_map');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+
+option = {
+  title: {
+    text: '电影评分和时长的关系',
+    subtext: '均分'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    name: '时长',
+    type: 'category',
+    boundaryGap: false,
+    // prettier-ignore
+    data: key
+//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {},
+    axisPointer: {
+      snap: true
+    }
+  },
+  visualMap: {
+    show: false,
+    dimension: 0
+  },
+  series: [
+    {
+      name: 'score',
+      type: 'line',
+      smooth: true,
+      // prettier-ignore
+      data: values
+//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+function echarts_echarts_test4(){
+
+$.ajax({
+		url: "/get_test4_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_4');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+
+option = {
+  title: {
+    text: '每个时间段的评论人数',
+    subtext: '数量'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    name: '时间',
+    type: 'category',
+    boundaryGap: false,
+    // prettier-ignore
+    data: key
+//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {},
+    axisPointer: {
+      snap: true
+    }
+  },
+  visualMap: {
+    show: false,
+    dimension: 0
+  },
+  series: [
+    {
+      name: 'count',
+      type: 'line',
+      smooth: true,
+      // prettier-ignore
+      data: values
+//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test5(){
+$.ajax({
+		url: "/get_test5_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+
+var chartDom = document.getElementById('chart_5');
+var myChart = echarts.init(chartDom);
+var option;
+
+var dict_language_movie = data.aaa;
+var rows=new Array();
+
+for (var key in dict_language_movie) {
+   row = new Object()
+　　row.name=key
+   row.value=dict_language_movie[key]
+   rows.push(row)
+}
+
+
+option = {
+  title: {
+    text: '电影语言占比',
+    subtext: '',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      data:rows,
+//        [
+////        { value: 1048, name: 'Search Engine' },
+////        { value: 735, name: 'Direct' },
+////        { value: 580, name: 'Email' },
+////        { value: 484, name: 'Union Ads' },
+////        { value: 300, name: 'Video Ads' }
+//        rows
+//      ],
+
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test6(){
+
+$.ajax({
+		url: "/get_test6_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+
+var chartDom = document.getElementById('chart_6');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+title: {
+        text: '近十年上映的电影数量',
+        subtext: '数量'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: [
+      '2010年',
+      '2011年',
+      '2012年',
+      '2013年',
+      '2014年',
+      '2015年',
+      '2016年',
+      '2017年',
+      '2018年',
+      '2019年'
+    ],
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: '数量',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
 
 
 function echarts_predict_score_line() {
@@ -1055,78 +1536,20 @@ function wordcloud_img() {
     })
 }
 
-function china_map() {
-    console.log("中国地图显示")
 
-    var chartDiv = document.getElementById('chart_map')
-    var mDiv = document.createElement('div')
-    chartDiv.parentElement.insertBefore(mDiv, chartDiv)
-
-    mDiv.setAttribute('id', "map_info_bar")
-    mDiv.innerText = "aaaaaaaaaaaaaaaaa"
-
-    var myChart = echarts.init(chartDiv);
-
-
-    var option = {
-        tooltip: {
-            //                    show: false //不显示提示标签
-            formatter: '{b}', //提示标签格式
-            backgroundColor: "#ff7f50", //提示标签背景颜色
-            textStyle: {
-                color: "#fff"
-            } //提示标签字体颜色
-        },
-        series: [{
-            type: 'map',
-            mapType: 'china',
-            label: {
-                normal: {
-                    show: true, //显示省份标签
-                    textStyle: {
-                        color: "#c71585"
-                    } //省份标签字体颜色
-                },
-                emphasis: { //对应的鼠标悬浮效果
-                    show: true,
-                    textStyle: {
-                        color: "#800080"
-                    }
-                }
-            },
-            itemStyle: {
-                normal: {
-                    borderWidth: .5, //区域边框宽度
-                    borderColor: '#009fe8', //区域边框颜色
-                    areaColor: "#ffefd5", //区域颜色
-                },
-                emphasis: {
-                    borderWidth: .5,
-                    borderColor: '#4b0082',
-                    areaColor: "#ffdead",
-                }
-            },
-            data: [
-                // {name: '福建', selected: true}//福建为选中状态
-            ]
-        }],
-    };
-
-    myChart.setOption(option);
-    // myChart.on('mouseover', function (params) {
-    //     var dataIndex = params.dataIndex;
-    //     console.log(params);
-    // });
-    myChart.on('mouseup', function (params) {
-        var dataIndex = params.dataIndex;
-        console.log(dataIndex);
-    })
-
-
-}
 
 
 function flashAll() {
+//    echarts_word_cloud()
+//    echarts_echarts_test()
+//    echarts_echarts_test1()
+//    echarts_echarts_test2()
+//    echarts_echarts_test3()
+//    echarts_echarts_test4()
+//    echarts_echarts_test5()
+//    echarts_echarts_test6()
+
+
     echarts_predict_score_line()
     wordcloud_img()
     // china_map()
@@ -1148,7 +1571,7 @@ function flashAll() {
 }
 
 // 执行
-$(function () {
-    setInterval(flashAll, 1000 * 60 * 30) //每隔30分钟调用flashAll函数，刷新页面数据
-    flashAll() // 调用flashAll函数
+$(function() {
+	setInterval(flashAll, 1000 * 60 * 30)  //每隔30分钟调用flashAll函数，刷新页面数据
+	flashAll()  // 调用flashAll函数
 });

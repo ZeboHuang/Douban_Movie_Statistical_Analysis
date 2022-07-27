@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import json
+
 from flask import Flask as _Flask
 from flask import jsonify
 from flask import render_template
 from flask.json import JSONEncoder as _JSONEncoder
 import db
+import numpy as np
+
 
 # 重写Flask框架中的JSONEncoder类中的default方法
 class JSONEncoder(_JSONEncoder):
@@ -11,6 +15,8 @@ class JSONEncoder(_JSONEncoder):
         import decimal
         if isinstance(o, decimal.Decimal):
             return float(o)
+        elif isinstance(o, np.int64):
+            return int(o)
         super(JSONEncoder, self).default(o)
 
 
@@ -56,12 +62,36 @@ def get_word_cloud():
 #lhg modify start
 @app.route('/get_test_data')
 def get_test_data():
-    dict_ = {'category': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-             'value': [120, 200, 150, 80, 70, 110, 130]}
-    return dict_
-#lhg modify end
+    # dict_ = {'category': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    #          'value': [120, 200, 150, 80, 70, 110, 130]}
+    return jsonify(db.get_num_genre())
 
-'''
+
+@app.route('/get_test2_data')
+def get_test2_data():
+    return jsonify(db.get_score_person())
+
+
+@app.route('/get_test3_data')
+def get_test3_data():
+    return jsonify(db.get_score_time())
+
+
+@app.route('/get_test4_data')
+def get_test4_data():
+    return jsonify(db.get_time_count())
+
+
+@app.route('/get_test5_data')
+def get_test5_data():
+    return jsonify(db.get_language_movie())
+
+
+@app.route('/get_test6_data')
+def get_test6_data():
+    return jsonify(db.get_year_num_all())
+
+    '''
 @app.route('/get_world_map_data')
 def get_world_map_data():
     """
@@ -133,6 +163,7 @@ def get_world_static_list_data():
     return jsonify([111,222,333,111,222,333])
     # return jsonify(db.query_world_static_list_data())
 '''
+
 
 if __name__ == '__main__':
     app.run()

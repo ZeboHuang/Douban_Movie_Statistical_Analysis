@@ -61,6 +61,7 @@ class HousePriceHanYang(object):
                 continue
         return information
 
+
     def save_2_csv(self, list_):
         with open(r"./data/HousePriceHanYang.csv", 'a', encoding="utf-8") as fd:
             writer = csv.writer(fd)
