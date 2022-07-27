@@ -51,6 +51,7 @@ class ScorePrediction(object):
         self.equation.fit(self.x_train_t, self.y_train)
         self.theta = self.equation.coef_
 
+    # noinspection PyAttributeOutsideInit
     def predict(self, x_arr):
         """
         根据特征进行预测标签值
@@ -59,9 +60,9 @@ class ScorePrediction(object):
         """
         if self.equation is None:
             self.to_fit_linear_regression()
-
-        return self.std_y.inverse_transform(
+        self.pred = self.std_y.inverse_transform(
             self.equation.predict(self.std_x.fit_transform(x_arr)))
+        return self.pred
 
     def score(self):
         """
@@ -80,6 +81,8 @@ class ScorePrediction(object):
 
 
 class WordCloud(object):
+    """生成词云图片"""
+    # 预设电影列表
     movie_list = ["1292052", "1295644", "1292064", "1291841", "1307914"]
     stopwords = utils.stopwords_list('./data/stopwords.txt')
 
