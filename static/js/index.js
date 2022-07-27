@@ -945,51 +945,46 @@ function echarts_continent_pie() {
 
 function echarts_echarts_test(){
 
-
-
-
 $.ajax({
 		url: "/get_test_data",  //请求的资源路径
 		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-console.log('get_data: ')
-console.log(data)
-
-var category=data.category
-var value=data.value
-console.log(category)
-
-var chartDom = document.getElementById('chart_2');
+        var chartDom = document.getElementById('chart_2');
 var myChart = echarts.init(chartDom);
 var option;
+var data = data.bbb;
 
 option = {
-
-
+title: {
+//        text: '流行的电影类型',
+        subtext: '数量'
+    },
+  legend: {
+    // data: ['苹果', '梨'], //图例的数据数组
+    // selectedMode: 'single' //展示单项
+  },
   xAxis: {
     type: 'category',
-    data: category
+    data: [
+      '2010年',
+      '2011年',
+      '2012年',
+      '2013年',
+      '2014年',
+      '2015年',
+      '2016年',
+      '2017年',
+      '2018年',
+      '2019年'
+    ]
   },
   yAxis: {
     type: 'value'
   },
-  series: [
-    {
-      data: value,
-      type: 'bar',
-      showBackground: true,
-      backgroundStyle: {
-        color: 'rgba(180, 180, 180, 0.2)'
-      }
-    }
-  ]
+  series:
+    data
 };
 
 option && myChart.setOption(option);
-
-
-
-
-
 
 		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
 			alert('world_static_list ajax error')
@@ -999,9 +994,448 @@ option && myChart.setOption(option);
 }
 
 
+function echarts_echarts_test1(){
+
+$.ajax({
+		url: "/get_test1_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_1');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+title: {
+        text: '导演均分排名',
+        subtext: '均分'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: key,
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'score:',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test2(){
+$.ajax({
+		url: "/get_test2_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_3');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+    title: {
+        text: '演员均分排名',
+        subtext: '均分'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: key,
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'score:',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test3(){
+
+$.ajax({
+		url: "/get_test3_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+var chartDom = document.getElementById('chart_map');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+
+option = {
+  title: {
+    text: '电影评分和时长的关系',
+    subtext: '均分'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    name: '时长',
+    type: 'category',
+    boundaryGap: false,
+    // prettier-ignore
+    data: key
+//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {},
+    axisPointer: {
+      snap: true
+    }
+  },
+  visualMap: {
+    show: false,
+    dimension: 0
+  },
+  series: [
+    {
+      name: 'score',
+      type: 'line',
+      smooth: true,
+      // prettier-ignore
+      data: values
+//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+function echarts_echarts_test4(){
+
+$.ajax({
+		url: "/get_test4_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+var chartDom = document.getElementById('chart_4');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+
+option = {
+  title: {
+    text: '每个时间段的评论人数',
+    subtext: '数量'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    name: '时间',
+    type: 'category',
+    boundaryGap: false,
+    // prettier-ignore
+    data: key
+//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {},
+    axisPointer: {
+      snap: true
+    }
+  },
+  visualMap: {
+    show: false,
+    dimension: 0
+  },
+  series: [
+    {
+      name: 'count',
+      type: 'line',
+      smooth: true,
+      // prettier-ignore
+      data: values
+//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test5(){
+$.ajax({
+		url: "/get_test5_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+
+var chartDom = document.getElementById('chart_5');
+var myChart = echarts.init(chartDom);
+var option;
+
+var dict_language_movie = data.aaa;
+var rows=new Array();
+
+for (var key in dict_language_movie) {
+   row = new Object()
+　　row.name=key
+   row.value=dict_language_movie[key]
+   rows.push(row)
+}
+
+
+option = {
+  title: {
+    text: '电影语言占比',
+    subtext: '',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      data:rows,
+//        [
+////        { value: 1048, name: 'Search Engine' },
+////        { value: 735, name: 'Direct' },
+////        { value: 580, name: 'Email' },
+////        { value: 484, name: 'Union Ads' },
+////        { value: 300, name: 'Video Ads' }
+//        rows
+//      ],
+
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
+function echarts_echarts_test6(){
+
+$.ajax({
+		url: "/get_test6_data",  //请求的资源路径
+		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+
+var chartDom = document.getElementById('chart_6');
+var myChart = echarts.init(chartDom);
+var option;
+var key = data.key;
+var values = data.values;
+
+option = {
+title: {
+        text: '近十年上映的电影数量',
+        subtext: '数量'
+    },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: [
+      '2010年',
+      '2011年',
+      '2012年',
+      '2013年',
+      '2014年',
+      '2015年',
+      '2016年',
+      '2017年',
+      '2018年',
+      '2019年'
+    ],
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: '数量',
+      type: 'bar',
+      barWidth: '60%',
+      data: values
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
+			alert('world_static_list ajax error')
+		},
+		async: true
+	})
+
+
+}
+
+
 function flashAll() {
 //    echarts_word_cloud()
     echarts_echarts_test()
+    echarts_echarts_test1()
+    echarts_echarts_test2()
+    echarts_echarts_test3()
+    echarts_echarts_test4()
+    echarts_echarts_test5()
+    echarts_echarts_test6()
+
+
     // 调用上述所有函数
 	// world_static_list();
 	// echarts_china_rank();
