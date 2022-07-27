@@ -1,5 +1,5 @@
-// 大屏头部左边和右边疫情数字信息
-function world_static_list() {
+// ajax模板
+function ajax_template() {
 
     //发送ajax请求
     $.ajax({
@@ -15,287 +15,9 @@ function world_static_list() {
     })
 }
 
-//echart_1词云图
-function echarts_word_cloud() {
-    var chart = echarts.init(document.getElementById('chart_1'));
-
-    option = {
-        title: {
-//                text: '词云',//标题
-            x: 'center',
-            textStyle: {
-                fontSize: 23
-            }
-
-        },
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        tooltip: {
-            show: true
-        },
-        series: [{
-            name: '热点分析',//数据提示窗标题
-            type: 'wordCloud',
-            sizeRange: [6, 66],//画布范围，如果设置太大会出现少词（溢出屏幕）
-            rotationRange: [-45, 90],//数据翻转范围
-            //shape: 'circle',
-            textPadding: 0,
-            autoSize: {
-                enable: true,
-                minSize: 6
-            },
-            textStyle: {
-                normal: {
-                    color: function () {
-                        return 'rgb(' + [
-                            Math.round(200 + Math.random() * 256),
-                            Math.round(200 + Math.random() * 256),
-                            Math.round(200 + Math.random() * 256)
-                        ].join(',') + ')';
-                    }
-                },
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowColor: '#333'
-                }
-            },
-            data: data
-            // data: [{
-            //     name: "数据一",
-            //     value: 1000
-            // }, {
-            //     name: "数据二",
-            //     value: 520
-            // }]//name和value建议用小写，大写有时会出现兼容问题
-        }]
-    };
-    chart.setOption(option);
-    window.addEventListener("resize", function () {
-        chart.resize();
-    });
-}
-
-//echart_1中国城市疫情排行
-function echarts_china_rank() {
-//	var app = {};
-//	var chartDom = document.getElementById('chart_1');
-//	var myChart = echarts.init(chartDom);
-//	var option;
-//	var china_rank_data;
-//	$.ajax({
-//		url: "/get_china_rank_data",
-//		success: function(data) {
-//			china_rank_data = data;
-//			var posList = [
-//				'left', 'right', 'top', 'bottom',
-//				'inside',
-//				'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-//				'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-//			];
-//			app.configParameters = {
-//				rotate: {
-//					min: -90,
-//					max: 90
-//				},
-//				align: {
-//					options: {
-//						left: 'left',
-//						center: 'center',
-//						right: 'right'
-//					}
-//				},
-//				verticalAlign: {
-//					options: {
-//						top: 'top',
-//						middle: 'middle',
-//						bottom: 'bottom'
-//					}
-//				},
-//				position: {
-//					options: posList.reduce(function(map, pos) {
-//						map[pos] = pos;
-//						return map;
-//					}, {})
-//				},
-//				distance: {
-//					min: 0,
-//					max: 100
-//				}
-//			};
-//			app.config = {
-//				rotate: 90,
-//				align: 'left',
-//				verticalAlign: 'middle',
-//				position: 'insideBottom',
-//				distance: 15,
-//				onChange: function() {
-//					var labelOption = {
-//						normal: {
-//							rotate: app.config.rotate,
-//							align: app.config.align,
-//							verticalAlign: app.config.verticalAlign,
-//							position: app.config.position,
-//							distance: app.config.distance
-//						}
-//					};
-//					myChart.setOption({
-//						series: [{
-//							label: labelOption
-//						}, {
-//							label: labelOption
-//						}, {
-//							label: labelOption
-//						}, {
-//							label: labelOption
-//						}]
-//					});
-//				}
-//			};
-//			var labelOption = {
-//				show: false,
-//				position: app.config.position,
-//				distance: app.config.distance,
-//				align: app.config.align,
-//				verticalAlign: app.config.verticalAlign,
-//				rotate: app.config.rotate,
-//				formatter: '{c}  {name|{a}}',
-//				fontSize: 8,
-//				rich: {
-//					name: {}
-//				}
-//			};
-//			option = {
-//				tooltip: {
-//					trigger: 'axis',
-//					axisPointer: {
-//						type: 'shadow'
-//					}
-//				},
-//				color:['#ff5722', '#ff9800', '#9e9e9e', '#4caf50'],
-//				legend: {
-//					textStyle: {
-//						color: '#ffffff'
-//					},
-//					data: ['新增确诊', '总确诊', '死亡', '治愈']
-//				},
-//				textStyle: {
-//					color: '#eeeeee'
-//				},
-//				xAxis: [{
-//					type: 'category',
-//					axisTick: {
-//						show: true
-//					},
-//					data: china_rank_data[0]
-//				}],
-//				yAxis: [{
-//					type: 'value',
-//					show: true,
-//					axisLabel: {
-//					   formatter: function (value,index) {
-//						   return value/10000 + '万';
-//					   }}
-//				}],
-//				series: [{
-//						name: '新增确诊',
-//						type: 'bar',
-//						barGap: 0,
-//						label: labelOption,
-//						emphasis: {
-//							focus: 'series'
-//						},
-//						data: china_rank_data[2]
-//					},
-//					{
-//						name: '总确诊',
-//						type: 'bar',
-//						label: labelOption,
-//						emphasis: {
-//							focus: 'series'
-//						},
-//						data: china_rank_data[1]
-//					},
-//					{
-//						name: '死亡',
-//						type: 'bar',
-//						label: labelOption,
-//						emphasis: {
-//							focus: 'series'
-//						},
-//						data: china_rank_data[3]
-//					},
-//					{
-//						name: '治愈',
-//						type: 'bar',
-//						label: labelOption,
-//						emphasis: {
-//							focus: 'series'
-//						},
-//						data: china_rank_data[4]
-//					}
-//				]
-//			};
-//			option && myChart.setOption(option);
-//		},
-//		error: function(xhr, type, errorThrown) {
-//			alert('get_china_rank_data ajax error')
-//		},
-//		async: true
-//	});
-    var chartDom = document.getElementById('chart_1');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            top: '5%',
-            left: 'center'
-        },
-        series: [
-            {
-                name: 'Access From',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    borderRadius: 10,
-                    borderColor: '#fff',
-                    borderWidth: 2
-                },
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '40',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {value: 1048, name: 'Search Engine'},
-                    {value: 735, name: 'Direct'},
-                    {value: 580, name: 'Email'},
-                    {value: 484, name: 'Union Ads'},
-                    {value: 300, name: 'Video Ads'}
-                ]
-            }
-        ]
-    };
-
-    option && myChart.setOption(option);
-
-
-}
 
 //echart_2中国疫情地图
-function echarts_china_map() {
+function china_map() {
     console.log('echarts_china_map')
     //发送ajax请求
     $.ajax({
@@ -430,7 +152,7 @@ function echarts_china_map() {
 }
 
 //echart_map世界疫情地图
-function echarts_world_map() {
+function world_map() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('chart_map'));
     var mydata;
@@ -485,7 +207,7 @@ function echarts_world_map() {
                             }
                         }
                     },
-                    data: mydata  // [{name: 'Zimbabwe',value: 13076.978}, ...]
+                    data: mydata // [{name: 'Zimbabwe',value: 13076.978}, ...]
                 }]
             };
 
@@ -502,199 +224,199 @@ function echarts_world_map() {
     });
 }
 
-//新增确诊国家排行
-function echarts_world_rank() {
-    var chartDom = document.getElementById('chart_4');
-    var myChart = echarts.init(chartDom);
-    var mydata;
+//近十年类型电影量变化
+function movie_genres_change() {
+
     $.ajax({
-        url: "/get_world_rank_data",
-        success: function (data) {
-            mydata = data;
+        url: "/get_movie_genres_change", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
             var option;
+
             option = {
+                title: {
+                    text: 'Stacked Line'
+                },
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { // Use axis to trigger tooltip
-                        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-                    }
+                    trigger: 'axis'
                 },
-                color: ['#ff9800', '#ee633a', '#fc0101', '#9e9e9e'],
                 legend: {
-                    textStyle: {
-                        color: '#eeeeee'
-                    },
-                    top: '9%',
-                    data: ['新增确诊', '总确诊', '新增死亡', '总死亡']
-                },
-                textStyle: {
-                    color: '#eeeeee'
+                    data: data.legend
                 },
                 grid: {
                     left: '3%',
-                    right: '7%',
+                    right: '4%',
                     bottom: '3%',
                     containLabel: true
                 },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
                 xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: data.xAxis
+                },
+                yAxis: {
                     type: 'value'
                 },
-                yAxis: {
-                    type: 'category',
-                    data: mydata[0]
-                },
-                series: [{
-                    name: '新增确诊',
-                    type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: false
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    barWidth: '40%',
-                    data: mydata[1]
-                },
-                    {
-                        name: '总确诊',
-                        type: 'bar',
-                        stack: 'total',
-                        label: {
-                            show: false
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: mydata[2]
-                    },
-                    {
-                        name: '新增死亡',
-                        type: 'bar',
-                        stack: 'total',
-                        label: {
-                            show: false
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: mydata[3]
-                    },
-                    {
-                        name: '总死亡',
-                        type: 'bar',
-                        stack: 'total',
-                        label: {
-                            show: false
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: mydata[4]
-                    }
-                ]
+                series: data.series
             };
 
             option && myChart.setOption(option);
+
+
         },
-        error: function (xhr, type, errorThrown) {
-            alert('echarts_world_rank ajax error')
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
         },
         async: true
-    });
+    })
+
+
 }
 
-//世界每日新增确诊数
-function echarts_world_daily_confirm() {
-    var chartDom = document.getElementById('chart_5');
-    var myChart = echarts.init(chartDom);
-    var option;
-    var mydata;
+//导演作品平均评分排行榜
+function directors_sort() {
+
     $.ajax({
-        url: "/get_world_daily_confirm_data",
-        success: function (data) {
-            mydata = data;
+        url: "/get_directors_sort", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+
             option = {
+                title: {
+                    text: '导演均分排名',
+                    subtext: '均分'
+                },
                 tooltip: {
                     trigger: 'axis',
-                    position: function (pt) {
-                        return [pt[0], '10%'];
+                    axisPointer: {
+                        type: 'shadow'
                     }
                 },
-                textStyle: {
-                    color: '#eeeeee'
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
                 },
-                xAxis: {
+                xAxis: [{
                     type: 'category',
-                    boundaryGap: [0, '100%'],
-                    data: mydata[0]  //日期[年/月/日,...]
-                },
-                yAxis: {
-                    type: 'value',
-                    boundaryGap: [0, '100%'],
-                    axisLabel: {
-                        formatter: function (value, index) {
-                            return value / 10000;
-                        }
+                    data: data.names,
+                    axisTick: {
+                        alignWithLabel: true
                     }
-                },
-                dataZoom: [{
-                    type: 'inside',
-                    start: 0,
-                    end: 10
-                }, {
-                    start: 0,
-                    end: 10
-                }, {
-                    textStyle: {
-                        color: '#eeeeee'
-                    },
+                }],
+                yAxis: [{
+                    type: 'value'
                 }],
                 series: [{
-                    name: '全球新增确诊数',
-                    type: 'line',
-                    symbol: 'none',
-                    sampling: 'lttb',
-                    itemStyle: {
-                        color: 'rgb(255, 70, 131)'
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(255, 158, 68)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(255, 70, 131)'
-                        }])
-                    },
-                    data: mydata[1] //每日确诊数[11,22,...]
+                    name: 'score:',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: data.values
                 }]
             };
+
             option && myChart.setOption(option);
+
         },
-        error: function (xhr, type, errorThrown) {
-            alert('get_world_daily_confirm_data ajax error')
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
         },
         async: true
-    });
+    })
 
 
 }
 
-//世界和中国的疫苗接种数及接种率
-function echarts_world_china_vaccinations() {
-    var chartDom = document.getElementById('chart_6');
-    var myChart = echarts.init(chartDom);
-    var option;
-    var colors = ['#5470c6', '#14df36', '#5470C6', '#14df36'];
+//演员均分排行
+function person_sort() {
     $.ajax({
-        url: "/get_world_china_vaccinations",
-        success: function (data) {
-            var mydata = data;
+        url: "/get_person_sort", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+            var key = data.key;
+            var values = data.values;
+
             option = {
-                color: colors,
-                textStyle: {
-                    color: '#eeeeee'
+                title: {
+                    text: '演员均分排名',
+                    subtext: '均分'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: data.names,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: 'score:',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: data.values
+                }]
+            };
+
+            option && myChart.setOption(option);
+
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
+        },
+        async: true
+    })
+
+
+}
+
+//电影评分和时长的关系
+function movie_duration_score() {
+
+    $.ajax({
+        url: "/get_movie_duration_score", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+
+            option = {
+                title: {
+                    text: '电影评分和时长的关系',
+                    subtext: '均分'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -702,756 +424,350 @@ function echarts_world_china_vaccinations() {
                         type: 'cross'
                     }
                 },
-                grid: {
-                    right: '10%',
-                    borderColor: '#ccc'
+                toolbox: {
+                    show: true,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    name: '时长',
+                    type: 'category',
+                    boundaryGap: false,
+                    // prettier-ignore
+                    data: data.mins
+                    //    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {},
+                    axisPointer: {
+                        snap: true
+                    }
+                },
+                visualMap: {
+                    show: false,
+                    dimension: 0
+                },
+                series: [{
+                    name: 'score',
+                    type: 'line',
+                    smooth: true,
+                    // prettier-ignore
+                    data: data.scores
+                    //      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+                }]
+            };
+
+            option && myChart.setOption(option);
+
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
+        },
+        async: true
+    })
+
+
+}
+
+//各时间段用户的活跃程度-评论数量
+function duration_comment_num() {
+
+    $.ajax({
+        url: "/get_duration_comment_num", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+
+            option = {
+                title: {
+                    text: '每个时间段的评论人数',
+                    subtext: '数量'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    name: '时间',
+                    type: 'category',
+                    boundaryGap: false,
+                    // prettier-ignore
+                    data: data.hours
+                    //    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {},
+                    axisPointer: {
+                        snap: true
+                    }
+                },
+                visualMap: {
+                    show: false,
+                    dimension: 0
+                },
+                series: [{
+                    name: 'count',
+                    type: 'line',
+                    smooth: true,
+                    // prettier-ignore
+                    data: data.counts
+                    //      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+                }]
+            };
+
+            option && myChart.setOption(option);
+
+
+        },
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
+        },
+        async: true
+    })
+
+
+}
+
+//电影语言占比
+function movie_language_pie() {
+    $.ajax({
+        url: "/get_movie_language", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var rows = new Array();
+
+            for (var key in data) {
+                row = new Object()
+                row.name = key
+                row.value = data[key]
+                rows.push(row)
+            }
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                tooltip: {
+                    trigger: 'item'
                 },
                 legend: {
-                    textStyle: {
-                        color: '#eeeeee' // 图例文字颜色
-                    },
-                    data: ['世界', '中国', '世界接种率', '中国接种率']
+                    top: '5%',
+                    left: 'center'
                 },
-                xAxis: [{
-                    type: 'category',
-                    color: '#eeeeee',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    data: mydata.data[0] //日期
-                }],
-                yAxis: [{
-                    type: 'value',
-                    name: '接种数',
-                    min: 0,
-                    max: (mydata.max) * 1.25,
-                    position: 'right',
-                    splitLine: {
-                        show: false
-                    },
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: colors[0]
-                        }
-                    },
-                    axisLabel: {
-                        formatter: ''
-                    }
-                },
+                series: [
                     {
-                        type: 'value',
-                        name: '',
-                        min: 0,
-                        max: (mydata.max) * 1.25,
-                        position: 'right',
-                        splitLine: {
+                        name: 'Access From',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '40',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
                             show: false
                         },
-                        offset: 0,
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: colors[1]
-                            }
-                        },
-                        axisLabel: {
-                            formatter: function (value, index) {
-                                return Math.ceil(value / 100000000) + '亿';
-                            }
-                        }
-                    },
-                    {
-                        type: 'value',
-                        name: '接种率',
-                        min: 0,
-                        max: (mydata.maxPer) * 1.25,
-                        position: 'left',
-                        splitLine: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: colors[2]
-                            }
-                        },
-                        axisLabel: {
-                            formatter: ''
-                        }
-                    },
-                    {
-                        type: 'value',
-                        name: '',
-                        min: 0,
-                        max: 200,
-                        position: 'left',
-                        splitLine: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: colors[3]
-                            }
-                        },
-                        axisLabel: {
-                            formatter: '{value} %'
-                        }
-                    }
-                ],
-                series: [{
-                    name: '世界',
-                    type: 'bar',
-                    data: mydata.data[1]  //世界接种数
-                },
-                    {
-                        name: '中国',
-                        type: 'bar',
-                        yAxisIndex: 1,
-                        data: mydata.data[2]  //中国接种数
-                    },
-                    {
-                        name: '世界接种率',
-                        type: 'line',
-                        yAxisIndex: 2,
-                        data: mydata.data[3]  //世界接种率
-                    },
-                    {
-                        name: '中国接种率',
-                        type: 'line',
-                        yAxisIndex: 3,
-                        data: mydata.data[4]  //中国接种率
+                        data: rows,
                     }
                 ]
             };
 
             option && myChart.setOption(option);
+
+
         },
-        error: function (xhr, type, errorThrown) {
-            alert('get_world_china_vaccinations_data ajax error')
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
         },
         async: true
-    });
+    })
+
+
 }
 
-//世界每日新增死亡数
-function echarts_world_daily_dead() {
-    var chartDom = document.getElementById('chart_7');
-    var myChart = echarts.init(chartDom);
-    var option;
+//近十年上映的电影数量
+function movie_num_by_year() {
 
     $.ajax({
-        url: "/get_world_daily_dead_data",
-        success: function (data) {
-            mydata = data;
+        url: "/get_movie_num_by_year", //请求的资源路径
+        success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
+
+
+            var chartDom = document.getElementById('chart_map');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+// prettier-ignore
+            let dataAxis = data.years
+//             let dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
+// prettier-ignore
+            let value = data.counts
+//             let data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+            let yMax = Math.max(data.counts);
+            let dataShadow = [];
+            for (let i = 0; i < value.length; i++) {
+                dataShadow.push(yMax);
+            }
             option = {
-                tooltip: {
-                    trigger: 'axis',
-//					position: function(pt) {
-//						return [pt[0], '10%'];
-//					}
-                },
-                textStyle: {
-                    color: '#eeeeee'
+                title: {
+                    text: '特性示例：渐变色 阴影 点击缩放',
+                    subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
                 },
                 xAxis: {
-                    type: 'category',
-                    boundaryGap: [0, '100%'],
-                    data: mydata[0]
+                    data: dataAxis,
+                    axisLabel: {
+                        inside: true,
+                        color: '#fff'
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    z: 10
                 },
                 yAxis: {
-                    type: 'value',
-                    boundaryGap: [0, '100%'],
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
                     axisLabel: {
-                        formatter: function (value, index) {
-                            return value / 10000 + '万';
-                        }
+                        color: '#999'
                     }
                 },
-                dataZoom: [{
-                    type: 'inside',
-                    start: 0,
-                    end: 10
-                }, {
-                    start: 0,
-                    end: 10
-                }, {
-                    textStyle: {
-                        color: '#eeeeee'
-                    },
-                }],
-                series: [{
-                    name: '全球新增死亡数',
-                    type: 'line',
-                    symbol: 'none',
-                    sampling: 'lttb',
-                    itemStyle: {
-                        color: '#ffffff'
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#eeeeee'
-                        }, {
-                            offset: 1,
-                            color: '#eeeeee'
-                        }])
-                    },
-                    data: mydata[1]
-                }]
+                dataZoom: [
+                    {
+                        type: 'inside'
+                    }
+                ],
+                series: [
+                    {
+                        type: 'bar',
+                        showBackground: true,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {offset: 0, color: '#83bff6'},
+                                {offset: 0.5, color: '#188df0'},
+                                {offset: 1, color: '#188df0'}
+                            ])
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: '#2378f7'},
+                                    {offset: 0.7, color: '#2378f7'},
+                                    {offset: 1, color: '#83bff6'}
+                                ])
+                            }
+                        },
+                        data: value
+                    }
+                ]
             };
+// Enable data zoom when user click bar.
+            const zoomSize = 6;
+            myChart.on('click', function (params) {
+                console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                myChart.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                    endValue:
+                        dataAxis[Math.min(params.dataIndex + zoomSize / 2, value.length - 1)]
+                });
+            });
 
             option && myChart.setOption(option);
+            //
+            //
+            // var chartDom = document.getElementById('chart_map');
+            // var myChart = echarts.init(chartDom);
+            // var option;
+            // var key = value.key;
+            // var values = value.values;
+            //
+            // option = {
+            //     title: {
+            //         text: '近十年上映的电影数量',
+            //         subtext: '数量'
+            //     },
+            //     tooltip: {
+            //         trigger: 'axis',
+            //         axisPointer: {
+            //             type: 'shadow'
+            //         }
+            //     },
+            //     grid: {
+            //         left: '3%',
+            //         right: '4%',
+            //         bottom: '3%',
+            //         containLabel: true
+            //     },
+            //     xAxis: [{
+            //         type: 'category',
+            //         data: value.years,
+            //         axisTick: {
+            //             alignWithLabel: true
+            //         }
+            //     }],
+            //     yAxis: [{
+            //         type: 'value'
+            //     }],
+            //     series: [{
+            //         name: '数量',
+            //         type: 'bar',
+            //         barWidth: '60%',
+            //         data: value.counts
+            //     }]
+            // };
+            //
+            // option && myChart.setOption(option);
+
         },
-        error: function (xhr, type, errorThrown) {
-            alert('get_china_rank_data ajax error')
+        error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
+            alert('world_static_list ajax error')
         },
         async: true
-    });
+    })
 
 
 }
 
-//各大洲数据饼图分析
-function echarts_continent_pie() {
-	var mychart = echarts.init(document.getElementById("chart_3"));
-	var mydata;
-	$.ajax({
-		url: "/get_continent_pie_data",
-		success: function(data) {
-			mydata = data;
-			option = {
-				tooltip: {
-					trigger: 'item',
-					formatter: '{a} <br/>{b}: {c} ({d}%)'
-				},
-				legend: {
-					left: 'center',
-					data: ['亚洲', '南美洲', '北美洲', '非洲', '欧洲', '大洋洲', '其他'],
-					textStyle: {
-						color: "rgba(255, 255, 255, 1.0)"
-					}
-				},
-				series: [{
-					name: '各大洲分析',
-					type: 'pie',
-					radius: ['40%', '70%'],
-					avoidLabelOverlap: false,
-					itemStyle: {
-						borderRadius: 20,
-						borderColor: '#fff',
-						borderWidth: 1
-					},
-					label: {
-						show: false,
-						position: 'center'
-					},
-					emphasis: {
-						label: {
-							show: true,
-							fontSize: '20',
-							fontWeight: 'bold'
-						}
-					},
-					labelLine: {
-						show: false
-					},
-					data: mydata
-				}]
-			};
-			mychart.setOption(option);
-		},
-		error: function(xhr, type, errorThrown) {
-			alert('echarts_continent_pie ajax error')
-		},
-		async: true
-	});
-}
-
-function echarts_echarts_test(){
-
-$.ajax({
-		url: "/get_test_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-        var chartDom = document.getElementById('chart_2');
-var myChart = echarts.init(chartDom);
-var option;
-var data = data.bbb;
-option = {
-title: {
-//        text: '流行的电影类型',
-        subtext: '数量'
-    },
-  legend: {
-    // data: ['苹果', '梨'], //图例的数据数组
-    // selectedMode: 'single' //展示单项
-  },
-  xAxis: {
-    type: 'category',
-    data: [
-      '2010年',
-      '2011年',
-      '2012年',
-      '2013年',
-      '2014年',
-      '2015年',
-      '2016年',
-      '2017年',
-      '2018年',
-      '2019年'
-    ]
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series:
-    data
-};
-
-option && myChart.setOption(option);
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-}
-
-
-function echarts_echarts_test1(){
-
-$.ajax({
-		url: "/get_test1_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-
-var chartDom = document.getElementById('chart_1');
-var myChart = echarts.init(chartDom);
-var option;
-var key = data.key;
-var values = data.values;
-
-option = {
-title: {
-        text: '导演均分排名',
-        subtext: '均分'
-    },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: key,
-      axisTick: {
-        alignWithLabel: true
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value'
-    }
-  ],
-  series: [
-    {
-      name: 'score:',
-      type: 'bar',
-      barWidth: '60%',
-      data: values
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-
-function echarts_echarts_test2(){
-$.ajax({
-		url: "/get_test2_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-
-var chartDom = document.getElementById('chart_3');
-var myChart = echarts.init(chartDom);
-var option;
-var key = data.key;
-var values = data.values;
-
-option = {
-    title: {
-        text: '演员均分排名',
-        subtext: '均分'
-    },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: key,
-      axisTick: {
-        alignWithLabel: true
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value'
-    }
-  ],
-  series: [
-    {
-      name: 'score:',
-      type: 'bar',
-      barWidth: '60%',
-      data: values
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-
-function echarts_echarts_test3(){
-
-$.ajax({
-		url: "/get_test3_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-var chartDom = document.getElementById('chart_map');
-var myChart = echarts.init(chartDom);
-var option;
-var key = data.key;
-var values = data.values;
-
-
-option = {
-  title: {
-    text: '电影评分和时长的关系',
-    subtext: '均分'
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross'
-    }
-  },
-  toolbox: {
-    show: true,
-    feature: {
-      saveAsImage: {}
-    }
-  },
-  xAxis: {
-    name: '时长',
-    type: 'category',
-    boundaryGap: false,
-    // prettier-ignore
-    data: key
-//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
-  },
-  yAxis: {
-    type: 'value',
-    axisLabel: {},
-    axisPointer: {
-      snap: true
-    }
-  },
-  visualMap: {
-    show: false,
-    dimension: 0
-  },
-  series: [
-    {
-      name: 'score',
-      type: 'line',
-      smooth: true,
-      // prettier-ignore
-      data: values
-//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-function echarts_echarts_test4(){
-
-$.ajax({
-		url: "/get_test4_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-
-var chartDom = document.getElementById('chart_4');
-var myChart = echarts.init(chartDom);
-var option;
-var key = data.key;
-var values = data.values;
-
-
-option = {
-  title: {
-    text: '每个时间段的评论人数',
-    subtext: '数量'
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross'
-    }
-  },
-  toolbox: {
-    show: true,
-    feature: {
-      saveAsImage: {}
-    }
-  },
-  xAxis: {
-    name: '时间',
-    type: 'category',
-    boundaryGap: false,
-    // prettier-ignore
-    data: key
-//    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
-  },
-  yAxis: {
-    type: 'value',
-    axisLabel: {},
-    axisPointer: {
-      snap: true
-    }
-  },
-  visualMap: {
-    show: false,
-    dimension: 0
-  },
-  series: [
-    {
-      name: 'count',
-      type: 'line',
-      smooth: true,
-      // prettier-ignore
-      data: values
-//      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-
-function echarts_echarts_test5(){
-$.ajax({
-		url: "/get_test5_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-
-
-var chartDom = document.getElementById('chart_5');
-var myChart = echarts.init(chartDom);
-var option;
-
-var dict_language_movie = data.aaa;
-var rows=new Array();
-
-for (var key in dict_language_movie) {
-   row = new Object()
-　　row.name=key
-   row.value=dict_language_movie[key]
-   rows.push(row)
-}
-
-
-option = {
-  title: {
-    text: '电影语言占比',
-    subtext: '',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: 'Access From',
-      type: 'pie',
-      radius: '50%',
-      data:rows,
-//        [
-////        { value: 1048, name: 'Search Engine' },
-////        { value: 735, name: 'Direct' },
-////        { value: 580, name: 'Email' },
-////        { value: 484, name: 'Union Ads' },
-////        { value: 300, name: 'Video Ads' }
-//        rows
-//      ],
-
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-
-function echarts_echarts_test6(){
-
-$.ajax({
-		url: "/get_test6_data",  //请求的资源路径
-		success: function (data) {  //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-
-
-
-var chartDom = document.getElementById('chart_6');
-var myChart = echarts.init(chartDom);
-var option;
-var key = data.key;
-var values = data.values;
-
-option = {
-title: {
-        text: '近十年上映的电影数量',
-        subtext: '数量'
-    },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: [
-      '2010年',
-      '2011年',
-      '2012年',
-      '2013年',
-      '2014年',
-      '2015年',
-      '2016年',
-      '2017年',
-      '2018年',
-      '2019年'
-    ],
-      axisTick: {
-        alignWithLabel: true
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value'
-    }
-  ],
-  series: [
-    {
-      name: '数量',
-      type: 'bar',
-      barWidth: '60%',
-      data: values
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-
-		},error: function(xhr, type, errorThrown) {   //如果请求失败则这些error对应的function
-			alert('world_static_list ajax error')
-		},
-		async: true
-	})
-
-
-}
-
-
-
-function echarts_predict_score_line() {
+//机器学习-预测评分
+function predict_score_line() {
     //发送ajax请求
     $.ajax({
         url: "/get_predict_score", //请求的资源路径
@@ -1466,7 +782,7 @@ function echarts_predict_score_line() {
 
             option = {
                 title: {
-                    text: 'Stacked Line'
+                    text: "模型得分:" + data.score + "方差:" + data.square_mean_error
                 },
                 tooltip: {
                     trigger: 'axis'
@@ -1494,13 +810,12 @@ function echarts_predict_score_line() {
                 yAxis: {
                     type: 'value'
                 },
-                series: [
-                    {
-                        name: '真实值',
-                        type: 'line',
-                        stack: 'Total',
-                        data: data.real
-                    },
+                series: [{
+                    name: '真实值',
+                    type: 'line',
+                    stack: 'Total',
+                    data: data.real
+                },
                     {
                         name: '预测值',
                         type: 'line',
@@ -1522,6 +837,7 @@ function echarts_predict_score_line() {
 
 }
 
+//云图
 function wordcloud_img() {
     //发送ajax请求
 
@@ -1547,23 +863,27 @@ function wordcloud_img() {
 }
 
 
-
-
 function flashAll() {
-//    echarts_word_cloud()
-//    echarts_echarts_test()
-//    echarts_echarts_test1()
-//    echarts_echarts_test2()
-//    echarts_echarts_test3()
-//    echarts_echarts_test4()
-//    echarts_echarts_test5()
-//    echarts_echarts_test6()
+    // recent_years_movies_count_by_genre()
+    // directors_sort()
+    // person_sort()
+    // movie_duration_score()
+    // duration_comment_num()
+    // movie_language_pie()
+    movie_num_by_year()
 
 
-    echarts_predict_score_line()
-    wordcloud_img()
-    // china_map()
-    echarts_china_map()
+    // echarts_echarts_test2()
+    // echarts_echarts_test3()
+    // echarts_echarts_test4()
+    // echarts_echarts_test5()
+    // echarts_echarts_test6()
+
+
+    // echarts_predict_score_line()
+    // wordcloud_img()
+    // // china_map()
+    // echarts_china_map()
 
 
     // echarts_world_rank()
@@ -1581,7 +901,7 @@ function flashAll() {
 }
 
 // 执行
-$(function() {
-	setInterval(flashAll, 1000 * 60 * 30)  //每隔30分钟调用flashAll函数，刷新页面数据
-	flashAll()  // 调用flashAll函数
+$(function () {
+    setInterval(flashAll, 1000 * 60 * 30) //每隔30分钟调用flashAll函数，刷新页面数据
+    flashAll() // 调用flashAll函数
 });

@@ -3,7 +3,14 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\data\comments.csv">
+        <entry key="\data\directors_sort.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\duration_comment_num.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -17,21 +24,42 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\movies.csv">
+        <entry key="\data\movie_duration_score.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\person.csv">
+        <entry key="\data\movie_language.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\ratings.csv">
+        <entry key="\data\movie_num_by_year.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\movies_year_range.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\person_sort.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\person.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -39,13 +67,6 @@
           </value>
         </entry>
         <entry key="\data\recent_years_genres.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\data\users.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

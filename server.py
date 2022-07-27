@@ -84,7 +84,7 @@ class WordCloud(object):
     """生成词云图片"""
     # 预设电影列表
     movie_list = ["1292052", "1295644", "1292064", "1291841", "1307914"]
-    stopwords = utils.stopwords_list('./data/stopwords.txt')
+    stopwords = utils.stopwords_list('data/raw/stopwords.txt')
 
     def __init__(self):
         self.file_path = './data/comments_groupfy.csv'
@@ -144,13 +144,9 @@ def refresh_word_cloud():
     word_cloud.generate_wordcloud()
 
 
-def get_china_actors():
-    with open("./data/province_actors_cnt.json", encoding='utf-8') as fp:
-        dict_ = json.load(fp)
-    return dict_
-
-
 if __name__ == '__main__':
     # refresh_word_cloud()
-    print(get_china_actors())
+    # print(get_china_actors())
+    # get_recent_years_movies_count_by_genre()
+    # get_directors_sort(10)
     pass
