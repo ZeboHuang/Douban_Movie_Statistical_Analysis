@@ -78,7 +78,7 @@ def get_directors_sort():
 @app.route('/get_person_sort')
 def get_person_sort():
     """演员均分排行榜"""
-    return db.get_person_sort(150)
+    return db.get_person_sort(20)
 
 
 @app.route('/get_movie_duration_score')

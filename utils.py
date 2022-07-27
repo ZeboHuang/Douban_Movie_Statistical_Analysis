@@ -70,8 +70,10 @@ def province_actors():
     data3 = data2.drop(['BIRTHPLACE'], axis=1).join(place[0]).join(place[1])
     data3.columns = ['PERSON_ID', 'NAME', 'SEX', 'BIRTH', 'PROFESSION', 'REGION_1', 'REGION_2']
     data4 = data3.groupby('REGION_2')
-    data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json', force_ascii=False)
+    data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json')
+    # data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json', force_ascii=False)
     print("按省分类演员表")
+
 
 # lhg modify start
 
@@ -132,7 +134,6 @@ def directors_sort():
     print("导演排行表")
 
 
-
 # 演员均分排行
 def person_sort():
     data = pd.read_csv("./data/raw/movies.csv", usecols=["MOVIE_ID", "DOUBAN_SCORE", "ACTORS", "ACTOR_IDS"])
@@ -161,7 +162,6 @@ def person_sort():
     result.to_csv("./data/person_sort.csv", encoding='utf-8-sig', index=False)
     # 出表
     print("演员排行表")
-
 
 
 # 电影时长与得分的关系
@@ -196,7 +196,6 @@ def duration_comment_num():
     print("时段评论量")
 
 
-
 # 各语言电影占比
 def movie_language():
     data = pd.read_csv("./data/raw/movies.csv", usecols=['MOVIE_ID', 'LANGUAGES'])
@@ -225,17 +224,18 @@ def movie_num_by_year():
 
 
 def init_file():
-    learning_data()
-    comments_groupby_movie()
+    # learning_data()
+    # comments_groupby_movie()
     province_actors()
-    movie_genres_change()
-    directors_sort()
-    person_sort()
-    movie_duration_score()
-    duration_comment_num()
-    movie_language()
-    movie_num_by_year()
+    # movie_genres_change()
+    # directors_sort()
+    # person_sort()
+    # movie_duration_score()
+    # duration_comment_num()
+    # movie_language()
+    # movie_num_by_year()
     print("所有文件构造已完成!")
+
 
 if __name__ == '__main__':
     init_file()

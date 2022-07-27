@@ -26,7 +26,6 @@ predict_score = sv.get_score_prediction()
 wordcloud_ = sv.get_word_cloud()
 
 
-
 def get_word_cloud():
     dict_ = {'path': wordcloud_.wordcloud_path}
     return dict_

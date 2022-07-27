@@ -10,6 +10,8 @@
 import utils
 
 """测试utils"""
+
+
 def test_utils():
     """
      1.
@@ -38,7 +40,5 @@ def test_utils():
     """
 
 
-
 if __name__ == '__main__':
     test_utils()
-
