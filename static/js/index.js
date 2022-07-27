@@ -1541,19 +1541,19 @@ function wordcloud_img() {
 
 function flashAll() {
 //    echarts_word_cloud()
-    echarts_echarts_test()
-    echarts_echarts_test1()
-    echarts_echarts_test2()
-    echarts_echarts_test3()
-    echarts_echarts_test4()
-    echarts_echarts_test5()
-    echarts_echarts_test6()
+//    echarts_echarts_test()
+//    echarts_echarts_test1()
+//    echarts_echarts_test2()
+//    echarts_echarts_test3()
+//    echarts_echarts_test4()
+//    echarts_echarts_test5()
+//    echarts_echarts_test6()
 
 
-//    echarts_predict_score_line()
-//    wordcloud_img()
-//    // china_map()
-//    echarts_china_map()
+    echarts_predict_score_line()
+    wordcloud_img()
+    // china_map()
+    echarts_china_map()
 
 
     // echarts_world_rank()
