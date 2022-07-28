@@ -81,13 +81,15 @@ class ScorePrediction(object):
 class WordCloud(object):
     """生成词云图片"""
     # 预设电影列表
+
+    index = 0
     movie_list = ["1292052", "1295644", "1292064", "1291841", "1307914"]
     stopwords = utils.stopwords_list('data/raw/stopwords.txt')
 
     def __init__(self):
         self.file_path = './data/comments_groupfy.csv'
         self.mask_path = "./static/img/wordcloud_template/{}.png"
-        self.wordcloud_path = "./static/cache/wordcloud.png"
+        self.wordcloud_path = "./static/cache/wordcloud{}.png"
 
     def read_comments(self, movie_id):
         # reader = pd.read_csv(self.path, chunksize=1000)
@@ -104,7 +106,7 @@ class WordCloud(object):
             movie_id = random.sample(WordCloud.movie_list, 1)[0]
         comments = self.read_comments(movie_id)  # 获取影评内容
 
-        print(comments)
+        # print(comments)
         # img = Image.open(self.mask_path.format('1307914'))
 
         if movie_id in self.movie_list:
@@ -123,7 +125,8 @@ class WordCloud(object):
             stopwords=WordCloud.stopwords
         ).generate(" ".join(jieba.cut(comments)))  # jieba.cut(finalComment)) :把影评的字符串切割成词语  generate：把词语组成词云
         # 生成词云文件
-        wordCloud.to_file(self.wordcloud_path)
+        wordCloud.to_file(self.wordcloud_path.format(WordCloud.index))
+        WordCloud.index += 1
 
 
 word_cloud = WordCloud()
@@ -147,4 +150,7 @@ if __name__ == '__main__':
     # print(get_china_actors())
     # get_recent_years_movies_count_by_genre()
     # get_directors_sort(10)
+    for id in word_cloud.movie_list:
+        word_cloud.generate_wordcloud(id)
+
     pass

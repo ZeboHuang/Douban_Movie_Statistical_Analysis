@@ -41,9 +41,9 @@ function china_map() {
 
             var ec_center_option = {
                 title: {
-                    text: '',
+                    text: '国内演员分布状况',
                     subtext: '',
-                    x: 'left'
+                    x: 'center'
                 },
                 tooltip: {
                     trigger: 'item'
@@ -55,7 +55,7 @@ function china_map() {
                     y: 'bottom',
                     textStyle: {
                         fontSize: 8,
-                        color: "rgba(255, 255, 255, 1.0)",
+                        color: "rgba(0, 0,0, 1.0)",
                     },
                     legend: {
                         bottom: "0%",
@@ -72,17 +72,17 @@ function china_map() {
                         },
                         {
                             start: 100,
+                            end: 499
+                        },
+                        {
+                            start: 500,
                             end: 999
                         },
                         {
-                            start: 1000,
-                            end: 9999
-                        },
-                        {
-                            start: 10000
+                            start: 1000
                         }
                     ],
-                    color: ['#8A3310', '#C64918', '#E55B25', '#F2AD92', '#F9DCD1']
+                    color: ['#3A0010', '#8A0010', '#E55B25', '#F2AD92', '#F9DCD1']
                 },
 
                 //配置属性
@@ -95,7 +95,7 @@ function china_map() {
                         normal: {
                             label: {
                                 show: true,
-                                color: '#fff'
+                                color: '#555'
                             },
                             borderWidth: .5,
                             borderColor: '#009fe8',
@@ -104,7 +104,7 @@ function china_map() {
                         emphasis: {
                             borderWidth: .5,
                             borderColor: '#4b0082',
-                            areaColor: '#fff'
+                            areaColor: '#555'
                         }
                     },
                     label: {
@@ -151,79 +151,6 @@ function china_map() {
 
 }
 
-//echart_map世界地图
-function world_map() {
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('chart_map'));
-    var mydata;
-    $.ajax({
-        url: "/get_world_map_data",
-        success: function (data) {
-            mydata = data;
-            option = {
-                title: {
-                    left: 'center',
-                    top: 'top'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: function (params) {
-                        var value = (params.value + '').split('.');
-                        value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
-                        return params.seriesName + '<br/>' + params.name + ' : ' + value;
-                    }
-                },
-                visualMap: {
-                    min: 0,
-                    max: 1000000,
-                    textStyle: {
-                        color: '#fff'
-                    },
-                    text: ['High', 'Low'],
-                    realtime: false,
-                    calculable: true,
-                    color: ['orangered', 'yellow', 'lightskyblue']
-                },
-
-                series: [{
-                    name: 'World Coc-2021 (confirm)',
-                    type: 'map',
-                    mapType: 'world',
-                    roam: true,
-                    itemStyle: {
-                        normal: { //静态的时候显示的默认样式
-
-                            show: true, //默认是否显示
-                            textStyle: {
-                                color: 'red'
-                            }
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    data: mydata // [{name: 'Zimbabwe',value: 13076.978}, ...]
-                }]
-            };
-
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-            window.addEventListener("resize", function () {
-                myChart.resize();
-            });
-        },
-        error: function (xhr, type, errorThrown) {
-            alert('echarts_world_map ajax error')
-        },
-        async: true
-    });
-}
-
 //近十年类型电影量变化
 function movie_genres_change() {
 
@@ -239,7 +166,7 @@ function movie_genres_change() {
             option = {
                 title: {
                     textStyle: {
-                        color: 'red',
+                        color: '#CDB38B',
                         fontSize: 20
                     },
                     text: '近十年电影类型的变化'
@@ -264,14 +191,14 @@ function movie_genres_change() {
                 xAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#CDB38B',
                             fontSize: 14
                         },
                         rotate: -30,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#CDB38B",
                         fontSize: 18,
                         // padding:10
                     },
@@ -283,14 +210,14 @@ function movie_genres_change() {
                 yAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#CDB38B',
                             fontSize: 14
                         },
                         rotate: 0,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#CDB38B",
                         fontSize: 18,
                         // padding:10
                     },
@@ -325,73 +252,79 @@ function directors_sort() {
             var myChart = echarts.init(chartDom);
             var option;
 
+            console.log("导演")
+            rows = new Array();
+
+            for (var i = 0; i < data.names.length; i++) {
+                row = new Object();
+                row.name = data.names[i];
+                row.value = data.values[i];
+                // console.log(row)
+                rows.push(row);
+            }
+
             option = {
                 title: {
-                    textStyle: {
-                        color: 'red',
-                        fontSize: 20
-                    },
-                    text: '导演均分排名',
+                    text: '导演排行榜',
+                    padding: [100,20,20,20]
                 },
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c}%'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {readOnly: false},
+                        restore: {},
+                        saveAsImage: {}
                     }
                 },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
+                legend: {
+                    data: data.names
                 },
-                xAxis: [{
-                    axisLabel: {
-                        textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
+                series: [
+                    {
+                        name: '导演',
+                        type: 'funnel',
+                        left: '10%',
+                        top: 60,
+                        bottom: 60,
+                        width: '80%',
+                        min: 0,
+                        max: 100,
+                        minSize: '0%',
+                        maxSize: '100%',
+                        sort: 'descending',
+                        gap: 2,
+                        label: {
+                            show: true,
+                            position: 'inside'
                         },
-                        rotate: -30,
-                        clickable: true
-                    },
-                    nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
-                        // padding:10
-                    },
-                    name: '导演',
-                    type: 'category',
-                    data: data.names,
-                    axisTick: {
-                        alignWithLabel: true
+                        labelLine: {
+                            length: 10,
+                            lineStyle: {
+                                width: 1,
+                                type: 'solid'
+                            }
+                        },
+                        itemStyle: {
+                            borderColor: '#fff',
+                            borderWidth: 1
+                        },
+                        emphasis: {
+                            label: {
+                                fontSize: 20
+                            }
+                        },
+                        data: rows
                     }
-                }],
-                yAxis: [{
-                    nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
-                        // padding:10
-                    },
-                    axisLabel: {
-                        textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
-                        },
-                        rotate: 0,
-                        clickable: true
-                    },
-                    name: '均分',
-                    type: 'value'
-                }],
-                series: [{
-                    name: 'score:',
-                    type: 'bar',
-                    barWidth: '60%',
-                    data: data.values
-                }]
+                ]
             };
 
             option && myChart.setOption(option);
+
+
+
 
         },
         error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
@@ -417,9 +350,12 @@ function person_sort() {
             var values = data.values;
 
             option = {
+                color: [
+                    '#B2DFEE'
+                ],
                 title: {
                     textStyle: {
-                        color: 'red',
+                        color: '#000080',
                         fontSize: 20
                     },
                     text: '演员均分排名',
@@ -437,17 +373,35 @@ function person_sort() {
                     containLabel: true
                 },
                 xAxis: [{
+                    axisLabel: {
+                        textStyle: {
+                            color: '##363636',
+                            fontSize: 10
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
                     nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
+                        color: "#000080",
+                        fontSize: 10,
+                        // padding:10
+                    },
+                    name: '均分',
+                    type: 'value'
+                }],
+                yAxis: {
+                    inverse: true,
+                    nameTextStyle: {
+                        color: "#000080",
+                        fontSize: 10,
                         // padding:10
                     },
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
+                            color: '#000080',
+                            fontSize: 10
                         },
-                        rotate: -30,
+                        rotate: 0,
                         clickable: true
                     },
                     name: '演员',
@@ -456,24 +410,7 @@ function person_sort() {
                     axisTick: {
                         alignWithLabel: true
                     }
-                }],
-                yAxis: [{
-                    axisLabel: {
-                        textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
-                        },
-                        rotate: 0,
-                        clickable: true
-                    },
-                    nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
-                        // padding:10
-                    },
-                    name: '均分',
-                    type: 'value'
-                }],
+                },
                 series: [{
                     name: 'score:',
                     type: 'bar',
@@ -506,14 +443,10 @@ function movie_duration_score() {
             var myChart = echarts.init(chartDom);
             var option;
 
-
             option = {
+                color: ['#87CEEB'],
                 title: {
-                    textStyle: {
-                        color: 'red',
-                        fontSize: 20
-                    },
-                    text: '电影评分和时长的关系',
+                    text: '时长与得分关系表'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -528,58 +461,20 @@ function movie_duration_score() {
                     }
                 },
                 xAxis: {
-                    axisLabel: {
-                        textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
-                        },
-                        rotate: -30,
-                        clickable: true
-                    },
-                    nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
-                        // padding:10
-                    },
                     name: '时长',
                     type: 'category',
-                    boundaryGap: false,
-                    // prettier-ignore
                     data: data.mins
-                    //    ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
                 },
                 yAxis: {
-                    axisLabel: {
-                        textStyle: {
-                            color: '#ea7ccc',
-                            fontSize: 14
-                        },
-                        rotate: 0,
-                        clickable: true
-                    },
-                    nameTextStyle: {
-                        color: "yellow",
-                        fontSize: 18,
-                        // padding:10
-                    },
-                    name: '均分',
-                    type: 'value',
-                    axisPointer: {
-                        snap: true
+                    type: 'value'
+                },
+                series: [
+                    {
+                        data: data.scores,
+                        type: 'line',
+                        smooth: true
                     }
-                },
-                visualMap: {
-                    show: false,
-                    dimension: 0
-                },
-                series: [{
-                    name: 'score',
-                    type: 'line',
-                    smooth: true,
-                    // prettier-ignore
-                    data: data.scores
-                    //      [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
-                }]
+                ]
             };
 
             option && myChart.setOption(option);
@@ -609,9 +504,10 @@ function duration_comment_num() {
 
 
             option = {
+                color: ['#CD5B45'],
                 title: {
                     textStyle: {
-                        color: 'red',
+                        color: '#696969',
                         fontSize: 20
                     },
                     text: '每个时间段的评论人数',
@@ -631,14 +527,14 @@ function duration_comment_num() {
                 xAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#696969',
                             fontSize: 14
                         },
                         rotate: -30,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#696969",
                         fontSize: 18,
                         // padding:10
                     },
@@ -652,14 +548,14 @@ function duration_comment_num() {
                 yAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#696969',
                             fontSize: 14
                         },
                         rotate: 0,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#696969",
                         fontSize: 18,
                         // padding:10
                     },
@@ -674,7 +570,7 @@ function duration_comment_num() {
                     dimension: 0
                 },
                 series: [{
-                    name: 'count',
+                    name: '人数',
                     type: 'line',
                     smooth: true,
                     // prettier-ignore
@@ -718,6 +614,10 @@ function movie_language_pie() {
             var option;
 
             option = {
+                title: {
+                    text: '电影语种占比',
+                    // padding: [100,20,20,20]
+                },
                 tooltip: {
                     trigger: 'item'
                 },
@@ -727,7 +627,7 @@ function movie_language_pie() {
                 },
                 series: [
                     {
-                        name: 'Access From',
+                        name: '',
                         type: 'pie',
                         radius: ['40%', '70%'],
                         avoidLabelOverlap: false,
@@ -789,9 +689,12 @@ function movie_num_by_year() {
                 dataShadow.push(yMax);
             }
             option = {
+                color: [
+                    '#4682B4'
+                ],
                 title: {
                     textStyle: {
-                        color: 'red',
+                        color: '#2F4F4F',
                         fontSize: 20
                     },
                     text: '近十年上映的电影数量',
@@ -800,7 +703,7 @@ function movie_num_by_year() {
                 xAxis: {
                     name: '年份',
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#363636",
                         fontSize: 18,
                         // padding:10
                     },
@@ -822,7 +725,7 @@ function movie_num_by_year() {
                 },
                 yAxis: {
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#363636",
                         fontSize: 18,
                         // padding:10
                     },
@@ -906,12 +809,15 @@ function predict_score_line() {
             var option;
 
             option = {
+                color: [
+                    '#8B3A3A', '#EEAD0E'
+                ],
                 title: {
                     textStyle: {
-                        color: 'red',
+                        color: '#8B3A3A',
                         fontSize: 20
                     },
-                    text: "模型得分:" + data.score + "方差:" + data.square_mean_error
+                    text: "模型得分:" + data.score + "  方差:" + data.square_mean_error
                 },
                 tooltip: {
                     trigger: 'axis'
@@ -933,14 +839,14 @@ function predict_score_line() {
                 xAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#8B3A3A',
                             fontSize: 18
                         },
-                        rotate: -30,
+                        rotate: 0,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#8B3A3A",
                         fontSize: 18,
                         // padding:10
                     },
@@ -953,14 +859,14 @@ function predict_score_line() {
                 yAxis: {
                     axisLabel: {
                         textStyle: {
-                            color: '#ea7ccc',
+                            color: '#8B3A3A',
                             fontSize: 24
                         },
                         rotate: 0,
                         clickable: true
                     },
                     nameTextStyle: {
-                        color: "yellow",
+                        color: "#8B3A3A",
                         fontSize: 18,
                         // padding:10
                     },
@@ -975,7 +881,7 @@ function predict_score_line() {
                     {
                         name: '预测值',
                         type: 'line',
-                        data: data.pred
+                        data: data.pred,
                     }
                 ]
             };
@@ -1000,13 +906,22 @@ function wordcloud_img() {
         url: "/get_word_cloud", //请求的资源路径
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
             var chartDom = document.getElementById('chart_4');
-            console.log(data)
-            var img = document.createElement('img')
-            img.src = data.path
-            img.setAttribute("height", "100%")
-            console.log(img.src)
+            chartDom.style.display='flex'
+            let path_list = data.path_list;
+            for (let i = 0; i < path_list.length; i++) {
+                var img = document.createElement('img');
+                img.src = path_list[i];
+                img.style.flex=1
+                img.setAttribute("height", "100%");
+                chartDom.append(img);
+            }
 
-            chartDom.append(img)
+            // img.
+            // // console.log(img.src)
+            // chartDom.style.backgroundImage = "url(" + data.path + ")"
+            // chartDom.style.backgroundSize = 'contain'
+            // chartDom.style.backgroundRepeat = 'no-repeat'
+            // chartDom.style.backgroundPosition = 'center'
 
 
         },

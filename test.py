@@ -6,7 +6,7 @@
   date：            2022/1/25c
   Change Activity:  2022/1/25:
 """
-
+import db
 import utils
 
 """测试utils"""
@@ -38,7 +38,9 @@ def test_utils():
     """
     
     """
- abc
+    print(db.get_prediction())
+
 
 if __name__ == '__main__':
     test_utils()
+

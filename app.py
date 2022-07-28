@@ -72,7 +72,7 @@ def get_movie_genres_change():
 @app.route('/get_directors_sort')
 def get_directors_sort():
     """导演均分排行榜"""
-    return db.get_directors_sort(15)
+    return db.get_directors_sort(20)
 
 
 @app.route('/get_person_sort')
@@ -99,7 +99,7 @@ def get_movie_language():
 
 @app.route('/get_movie_num_by_year')
 def get_movie_num_by_year():
-    return db.get_movie_num_by_year()
+    return db.get_movie_num_by_year(1980, 2019)
 
 
 if __name__ == '__main__':
