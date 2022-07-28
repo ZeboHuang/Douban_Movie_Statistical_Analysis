@@ -224,16 +224,16 @@ def movie_num_by_year():
 
 
 def init_file():
-    # learning_data()
-    # comments_groupby_movie()
+    learning_data()
+    comments_groupby_movie()
     province_actors()
-    # movie_genres_change()
-    # directors_sort()
-    # person_sort()
-    # movie_duration_score()
-    # duration_comment_num()
-    # movie_language()
-    # movie_num_by_year()
+    movie_genres_change()
+    directors_sort()
+    person_sort()
+    movie_duration_score()
+    duration_comment_num()
+    movie_language()
+    movie_num_by_year()
     print("所有文件构造已完成!")
 
 

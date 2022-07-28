@@ -1,14 +1,14 @@
-import json
 import random
+
+import jieba
 import numpy as np
 import pandas as pd
-import jieba
-from sklearn.metrics import mean_squared_error
 from PIL import Image
-from wordcloud import wordcloud
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.linear_model import LinearRegression, SGDRegressor
+from sklearn.preprocessing import StandardScaler
+from wordcloud import wordcloud
 
 import utils
 

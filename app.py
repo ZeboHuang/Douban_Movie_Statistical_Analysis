@@ -29,7 +29,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("databoard.html")
+    return render_template("index.html")
 
 
 # hzb modify start

@@ -37,7 +37,7 @@ function china_map() {
             console.log(rows)
 
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('chart_map'));
+            var myChart = echarts.init(document.getElementById('chart_2'));
 
             var ec_center_option = {
                 title: {
@@ -232,16 +232,16 @@ function movie_genres_change() {
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_11');
             var myChart = echarts.init(chartDom);
             var option;
 
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '近十年电影类型的变化'
                 },
                 tooltip: {
@@ -263,38 +263,38 @@ function movie_genres_change() {
                 },
                 xAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: -30,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'年份',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '年份',
                     type: 'category',
                     boundaryGap: false,
                     data: data.xAxis
                 },
                 yAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: 0,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'数量',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '数量',
                     type: 'value'
                 },
                 series: data.series
@@ -321,16 +321,16 @@ function directors_sort() {
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_6');
             var myChart = echarts.init(chartDom);
             var option;
 
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '导演均分排名',
                 },
                 tooltip: {
@@ -347,19 +347,19 @@ function directors_sort() {
                 },
                 xAxis: [{
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: -30,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'导演',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '导演',
                     type: 'category',
                     data: data.names,
                     axisTick: {
@@ -368,19 +368,19 @@ function directors_sort() {
                 }],
                 yAxis: [{
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: 0,
-      clickable: true
-},
-                    name:'均分',
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
+                    name: '均分',
                     type: 'value'
                 }],
                 series: [{
@@ -395,7 +395,7 @@ function directors_sort() {
 
         },
         error: function (xhr, type, errorThrown) { //如果请求失败则这些error对应的function
-            alert('world_static_list ajax error')
+            alert('get_directors_sort ajax error')
         },
         async: true
     })
@@ -410,7 +410,7 @@ function person_sort() {
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_7');
             var myChart = echarts.init(chartDom);
             var option;
             var key = data.key;
@@ -419,9 +419,9 @@ function person_sort() {
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '演员均分排名',
                 },
                 tooltip: {
@@ -438,19 +438,19 @@ function person_sort() {
                 },
                 xAxis: [{
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: -30,
-      clickable: true
-},
-                    name:'演员',
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
+                    name: '演员',
                     type: 'category',
                     data: data.names,
                     axisTick: {
@@ -459,19 +459,19 @@ function person_sort() {
                 }],
                 yAxis: [{
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: 0,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'均分',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '均分',
                     type: 'value'
                 }],
                 series: [{
@@ -502,7 +502,7 @@ function movie_duration_score() {
         url: "/get_movie_duration_score", //请求的资源路径
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_8');
             var myChart = echarts.init(chartDom);
             var option;
 
@@ -510,9 +510,9 @@ function movie_duration_score() {
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '电影评分和时长的关系',
                 },
                 tooltip: {
@@ -529,18 +529,18 @@ function movie_duration_score() {
                 },
                 xAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: -30,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
                     name: '时长',
                     type: 'category',
                     boundaryGap: false,
@@ -550,19 +550,19 @@ function movie_duration_score() {
                 },
                 yAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: 0,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'均分',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '均分',
                     type: 'value',
                     axisPointer: {
                         snap: true
@@ -603,7 +603,7 @@ function duration_comment_num() {
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_9');
             var myChart = echarts.init(chartDom);
             var option;
 
@@ -611,9 +611,9 @@ function duration_comment_num() {
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '每个时间段的评论人数',
                 },
                 tooltip: {
@@ -630,18 +630,18 @@ function duration_comment_num() {
                 },
                 xAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: -30,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
                     name: '时间',
                     type: 'category',
                     boundaryGap: false,
@@ -651,19 +651,19 @@ function duration_comment_num() {
                 },
                 yAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 14
-      },
-      rotate: 0,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 14
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'数量',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '数量',
                     type: 'value',
                     axisPointer: {
                         snap: true
@@ -713,7 +713,7 @@ function movie_language_pie() {
             }
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_10');
             var myChart = echarts.init(chartDom);
             var option;
 
@@ -776,7 +776,7 @@ function movie_num_by_year() {
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_5');
             var myChart = echarts.init(chartDom);
             var option;
 
@@ -791,19 +791,19 @@ function movie_num_by_year() {
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: '近十年上映的电影数量',
 //                    subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
                 },
                 xAxis: {
-                    name:'年份',
+                    name: '年份',
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
                     data: dataAxis,
                     axisLabel: {
                         inside: true,
@@ -822,11 +822,11 @@ function movie_num_by_year() {
                 },
                 yAxis: {
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'数量',
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '数量',
                     axisLine: {
                         show: false
                     },
@@ -901,16 +901,16 @@ function predict_score_line() {
             console.log(data)
 
 
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_1');
             var myChart = echarts.init(chartDom);
             var option;
 
             option = {
                 title: {
                     textStyle: {
-      color: 'red',
-      fontSize: 20
-    },
+                        color: 'red',
+                        fontSize: 20
+                    },
                     text: "模型得分:" + data.score + "方差:" + data.square_mean_error
                 },
                 tooltip: {
@@ -932,39 +932,39 @@ function predict_score_line() {
                 },
                 xAxis: {
                     axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 18
-      },
-      rotate: -30,
-      clickable: true
-},
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 18
+                        },
+                        rotate: -30,
+                        clickable: true
+                    },
                     nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:"电影序号",
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: "电影序号",
                     type: 'category',
                     boundaryGap: false,
                     // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                     data: data.label
                 },
                 yAxis: {
-                axisLabel: {
-      textStyle: {
-        color: '#ea7ccc',
-        fontSize: 24
-      },
-      rotate: 0,
-      clickable: true
-},
-                nameTextStyle: {
-        color: "yellow",
-        fontSize:18,
-        // padding:10
-          },
-                    name:'评分',
+                    axisLabel: {
+                        textStyle: {
+                            color: '#ea7ccc',
+                            fontSize: 24
+                        },
+                        rotate: 0,
+                        clickable: true
+                    },
+                    nameTextStyle: {
+                        color: "yellow",
+                        fontSize: 18,
+                        // padding:10
+                    },
+                    name: '评分',
                     type: 'value'
                 },
                 series: [{
@@ -992,14 +992,14 @@ function predict_score_line() {
 
 }
 
-//云图
+//词云
 function wordcloud_img() {
     //发送ajax请求
 
     $.ajax({
         url: "/get_word_cloud", //请求的资源路径
         success: function (data) { //如果请求成功，则执行success对应的function,data会接收上一行请求url的返回值
-            var chartDom = document.getElementById('chart_map');
+            var chartDom = document.getElementById('chart_4');
             console.log(data)
             var img = document.createElement('img')
             img.src = data.path
@@ -1019,15 +1019,15 @@ function wordcloud_img() {
 
 
 function flashAll() {
-//    china_map()
-//    movie_genres_change()
-//    directors_sort()
-//    person_sort()
-//    movie_duration_score()
-//    duration_comment_num()
-//    movie_language_pie()
-//    movie_num_by_year()
-//    predict_score_line()
+    china_map()
+    movie_genres_change()
+    directors_sort()
+    person_sort()
+    movie_duration_score()
+    duration_comment_num()
+    movie_language_pie()
+    movie_num_by_year()
+    predict_score_line()
     wordcloud_img()
 }
 
