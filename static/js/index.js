@@ -169,7 +169,7 @@ function movie_genres_change() {
                         color: '#CDB38B',
                         fontSize: 20
                     },
-                    text: '近十年电影类型的变化'
+                    text: '近年电影类型的变化'
                 },
                 tooltip: {
                     trigger: 'axis'
@@ -697,7 +697,7 @@ function movie_num_by_year() {
                         color: '#2F4F4F',
                         fontSize: 20
                     },
-                    text: '近十年上映的电影数量',
+                    text: '近年上映的电影数量',
 //                    subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
                 },
                 xAxis: {
