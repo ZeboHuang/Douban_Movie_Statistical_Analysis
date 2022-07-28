@@ -1,22 +1,28 @@
 //Get the button:
 mybutton = document.getElementById("back2top");
 next_btn = document.getElementById('nextBtn');
+prev_btn = document.getElementById('prevBtn');
+
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
     scrollFunction()
 };
 
-function scrollFunction() {
-    // console.log('scroll')
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-        next_btn.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
-        next_btn.style.display = "none";
-    }
-}
+mybutton.style.display = "block";
+next_btn.style.display = "block";
+prev_btn.style.display = "block";
+
+// function scrollFunction() {
+//     // console.log('scroll')
+//     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+//
+//     } else {
+//         mybutton.style.display = "none";
+//         next_btn.style.display = "none";
+//         prev_btn.style.display = "none";
+//     }
+// }
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
@@ -29,13 +35,19 @@ var click_cnt = 0
 
 //跳转下一各锚点
 function nextFunction() {
-    let lst = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11];
-    if (click_cnt < lst.length) {
-        hrefstr=window.location.href.toString();
-        console.log(hrefstr[hrefstr.length-1])
-        window.location.href = "#block_" + lst[click_cnt++];
-    } else
-        click_cnt = 0;
+    if (click_cnt < 10) {
+        click_cnt+=1
+        window.location.href = "#block_" + click_cnt;
+        console.log(click_cnt)
+    }
+}
+
+function prevFunction() {
+    if (click_cnt > 0) {
+        click_cnt-=1
+        window.location.href = "#block_" + click_cnt;
+        console.log(click_cnt)
+    }
 }
 
 // console.log('in mjs')

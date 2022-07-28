@@ -47,13 +47,13 @@
         <div class="row align-items-center">
 
             <div class="col-11 col-xl-2">
-                <h1 class="mb-0 site-logo"><a href="index.html" class="text-white mb-0">AAAAA</a></h1>
+                <h1 class="mb-0 site-logo"><a href="/" class="text-white mb-0">AAAAA</a></h1>
             </div>
             <div class="col-12 col-md-10 d-none d-xl-block">
                 <nav class="site-navigation position-relative text-right" role="navigation">
 
                     <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li class="active"><a href="index.html"><span>Home</span></a></li>
+                        <li class="active"><a href="/"><span>Home</span></a></li>
                         <li class="has-children">
 
                             <a href="#"><span>数据分析</span></a>
@@ -61,15 +61,14 @@
 
                                 <li><a href="#block_1">预测豆瓣评分</a></li>
                                 <li><a href="#block_2">国内演员分布</a></li>
-<!--                                <li><a href="#block_3">世界出色电影分布</a></li>-->
-                                <li><a href="#block_4">影评词云</a></li>
-                                <li><a href="#block_5">电影年上映量</a></li>
-                                <li><a href="#block_6">导演作品排行</a></li>
-                                <li><a href="#block_7">演员作品排行</a></li>
-                                <li><a href="#block_8">电影时长排行</a></li>
-                                <li><a href="#block_9">用户活跃程度</a></li>
-                                <li><a href="#block_10">各语种电影</a></li>
-                                <li><a href="#block_11">电影类型变化</a></li>
+                                <li><a href="#block_3">影评词云</a></li>
+                                <li><a href="#block_4">电影年上映量</a></li>
+                                <li><a href="#block_5">导演作品排行</a></li>
+                                <li><a href="#block_6">演员作品排行</a></li>
+                                <li><a href="#block_7">电影时长排行</a></li>
+                                <li><a href="#block_8">用户活跃程度</a></li>
+                                <li><a href="#block_9">各语种电影</a></li>
+                                <li><a href="#block_10">电影类型变化</a></li>
 
 
                                 <!-- <li class="has-children">
@@ -114,8 +113,10 @@
 <button onclick="topFunction()" id="back2top" title="Go to top">Top</button>
 
 <button onclick="nextFunction()" id="nextBtn" title="NEXT">NEXT</button>
+<button onclick="prevFunction()" id="prevBtn" title="PREV">PREV</button>
 
-<div id="home" class="hero" style="background-image: url('../static/images/hero_1.jpg'); ">
+
+<div id="block_0" class="hero" style="background-image: url('../static/images/hero_1.jpg'); ">
     <div class="wrap" style="justify-content: center">
         <h1 style="font-size: 88px">豆瓣电影数据可视化分析</h1>
     </div>
@@ -153,7 +154,7 @@
 
 <!--</div>-->
 
-<div id="block_4" class="hero wrap" style="background-image: url('../static/images/4.jpg');">
+<div id="block_3" class="hero wrap" style="background-image: url('../static/images/4.jpg');">
 
     <div class="box blur">
         <div id="chart_4" class="chart" style="width:auto;height:85%;">
@@ -163,7 +164,7 @@
 
 </div>
 
-<div id="block_5" class="hero wrap" style="background-image: url('../static/images/5.jpg');">
+<div id="block_4" class="hero wrap" style="background-image: url('../static/images/5.jpg');">
 
     <div class="box blur">
         <div id="chart_5" class="chart" style="width:auto;height:85%;">
@@ -173,7 +174,7 @@
 
 </div>
 
-<div id="block_6" class="hero wrap" style="background-image: url('../static/images/6.jpg');">
+<div id="block_5" class="hero wrap" style="background-image: url('../static/images/6.jpg');">
 
     <div class="box blur">
         <div id="chart_6" class="chart" style="width:auto;height:85%;">
@@ -182,7 +183,7 @@
     </div>
 
 </div>
-<div id="block_7" class="hero wrap" style="background-image: url('../static/images/7.jpg');">
+<div id="block_6" class="hero wrap" style="background-image: url('../static/images/7.jpg');">
 
     <div class="box blur">
         <div id="chart_7" class="chart" style="width:auto;height:85%;">
@@ -191,7 +192,7 @@
     </div>
 
 </div>
-<div id="block_8" class="hero wrap" style="background-image: url('../static/images/8.jpg');">
+<div id="block_7" class="hero wrap" style="background-image: url('../static/images/8.jpg');">
 
     <div class="box blur">
         <div id="chart_8" class="chart" style="width:auto;height:85%;">
@@ -200,7 +201,7 @@
     </div>
 
 </div>
-<div id="block_9" class="hero wrap" style="background-image: url('../static/images/9.jpg');">
+<div id="block_8" class="hero wrap" style="background-image: url('../static/images/9.jpg');">
 
     <div class="box blur">
         <div id="chart_9" class="chart" style="width:auto;height:85%;">
@@ -209,7 +210,7 @@
     </div>
 
 </div>
-<div id="block_10" class="hero wrap" style="background-image: url('../static/images/10.jpg');">
+<div id="block_9" class="hero wrap" style="background-image: url('../static/images/10.jpg');">
 
     <div class="box blur">
         <div id="chart_10" class="chart" style="width:auto;height:85%;">
@@ -219,7 +220,7 @@
 
 </div>
 
-<div id="block_11" class="hero wrap" style="background-image: url('../static/images/11.jpg');">
+<div id="block_10" class="hero wrap" style="background-image: url('../static/images/11.jpg');">
 
     <div class="box blur">
         <div id="chart_11" class="chart" style="width:auto;height:80%;">
