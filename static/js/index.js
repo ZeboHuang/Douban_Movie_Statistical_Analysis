@@ -169,7 +169,7 @@ function movie_genres_change() {
                         color: '#CDB38B',
                         fontSize: 20
                     },
-                    text: '近年电影类型的变化'
+                    text: '近年电影类型数量的变化'
                 },
                 tooltip: {
                     trigger: 'axis'
@@ -446,7 +446,7 @@ function movie_duration_score() {
             option = {
                 color: ['#87CEEB'],
                 title: {
-                    text: '时长与得分关系表'
+                    text: '得分与时长关系表'
                 },
                 tooltip: {
                     trigger: 'axis',

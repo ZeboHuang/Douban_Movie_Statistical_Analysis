@@ -19,6 +19,7 @@ def stopwords_list(filepath):
 
 def learning_data():
     """獲取機器學習的數據集"""
+    #jupyter 构造
     print("机器学习表")
     pass
 
@@ -70,8 +71,8 @@ def province_actors():
     data3 = data2.drop(['BIRTHPLACE'], axis=1).join(place[0]).join(place[1])
     data3.columns = ['PERSON_ID', 'NAME', 'SEX', 'BIRTH', 'PROFESSION', 'REGION_1', 'REGION_2']
     data4 = data3.groupby('REGION_2')
-    data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json')
-    # data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json', force_ascii=False)
+    # data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json')
+    data4.PERSON_ID.count().sort_values(ascending=False).to_json('./data/province_actors_cnt.json', force_ascii=False)
     print("按省分类演员表")
 
 
@@ -224,16 +225,16 @@ def movie_num_by_year():
 
 
 def init_file():
-    learning_data()
-    comments_groupby_movie()
+    # learning_data()
+    # comments_groupby_movie()
     province_actors()
-    movie_genres_change()
-    directors_sort()
-    person_sort()
-    movie_duration_score()
-    duration_comment_num()
-    movie_language()
-    movie_num_by_year()
+    # movie_genres_change()
+    # directors_sort()
+    # person_sort()
+    # movie_duration_score()
+    # duration_comment_num()
+    # movie_language()
+    # movie_num_by_year()
     print("所有文件构造已完成!")
 
 
